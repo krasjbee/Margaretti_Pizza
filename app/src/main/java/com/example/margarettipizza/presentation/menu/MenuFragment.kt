@@ -23,6 +23,14 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
             detailsDialog.show(parentFragmentManager, "qwe")
         }
 
+//        val callback= object :OnBackPressedCallback(true){
+//            override fun handleOnBackPressed() {
+//                exitProcess(0)
+//            }
+//        }
+//        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,callback)
+
         super.onViewCreated(view, savedInstanceState)
     }
+
 }

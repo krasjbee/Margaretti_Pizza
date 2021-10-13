@@ -14,6 +14,11 @@ class EndFragment : Fragment(R.layout.fragment_end) {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.main_container, MenuFragment::class.java, null, null)
                 .commit()
+
+            for (i in 0..parentFragmentManager.backStackEntryCount) {
+                parentFragmentManager.popBackStack()
+            }
+
         }
         super.onViewCreated(view, savedInstanceState)
     }
