@@ -10,7 +10,7 @@ import com.example.margarettipizza.presentation.details.DetailsDialog
 
 class MenuFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val btOpenCart = view.findViewById<Button>(R.id.bt_open_cart)
+        val btOpenCart = view.findViewById<Button>(R.id.bt_from_home_to_cart)
         val btOpenDetails = view.findViewById<Button>(R.id.bt_open_details)
         btOpenCart.setOnClickListener {
             parentFragmentManager.beginTransaction()

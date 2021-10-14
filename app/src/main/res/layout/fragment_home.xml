@@ -18,10 +18,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="HOME"
+
         app:layout_constraintBottom_toBottomOf="@id/view_color_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:text="HOME"
+
         app:layout_constraintTop_toTopOf="@id/view_color_bar" />
 
 
@@ -30,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        app:layout_constraintBottom_toTopOf="@id/bt_open_cart"
+        app:layout_constraintBottom_toTopOf="@id/bt_from_home_to_cart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:text="Open details"
@@ -38,7 +40,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/bt_open_cart"
+        android:id="@+id/bt_from_home_to_cart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
