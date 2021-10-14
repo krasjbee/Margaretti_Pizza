@@ -7,16 +7,18 @@ import androidx.fragment.app.Fragment
 import com.example.margarettipizza.R
 import com.example.margarettipizza.presentation.cart.CartFragment
 import com.example.margarettipizza.presentation.details.DetailsDialog
+import com.example.margarettipizza.utils.navigateTo
 
 class MenuFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val btOpenCart = view.findViewById<Button>(R.id.bt_from_home_to_cart)
         val btOpenDetails = view.findViewById<Button>(R.id.bt_open_details)
         btOpenCart.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.main_container, CartFragment::class.java, null, null)
-                .addToBackStack(null)
-                .commit()
+//            parentFragmentManager.beginTransaction()
+//                .replace(R.id.main_container, CartFragment::class.java, null, null)
+//                .addToBackStack(null)
+//                .commit()
+            navigateTo(CartFragment.getInstance())
         }
         btOpenDetails.setOnClickListener {
             val detailsDialog = DetailsDialog()
@@ -33,4 +35,8 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
     }
 
+    companion object {
+        @JvmStatic
+        fun getInstance(): Fragment = MenuFragment()
+    }
 }
