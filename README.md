@@ -1,6 +1,8 @@
 # Antonio Margaretti's Pizza
 
-Add a picture here
+![antonio_margaretti_2_400x400](https://user-images.githubusercontent.com/61374472/137308621-430eb3e3-9523-4337-a086-d28e660a1e46.jpg)
+
+(Inglourious Basterds)
 
 ## Current state:
 
