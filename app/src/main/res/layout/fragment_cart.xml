@@ -8,9 +8,11 @@
         android:id="@+id/view_color_bar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/main_theme_color"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="parent"
+        android:background="@color/main_theme_color"
+
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -26,10 +28,12 @@
         android:id="@+id/bt_to_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="To end"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:text="To end"
+
         app:layout_constraintTop_toTopOf="parent" />
 
 

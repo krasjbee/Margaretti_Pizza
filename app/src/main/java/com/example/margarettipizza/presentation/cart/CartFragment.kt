@@ -8,9 +8,8 @@ import com.example.margarettipizza.R
 import com.example.margarettipizza.presentation.end.EndFragment
 
 class CartFragment : Fragment(R.layout.fragment_cart) {
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val btToEnd = view.findViewById<Button>(R.id.bt_to_end)
+        val btToEnd: Button = view.findViewById(R.id.bt_to_end)
         btToEnd.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.main_container, EndFragment::class.java, null, null)

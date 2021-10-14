@@ -13,21 +13,23 @@
         android:id="@+id/tv_reconstruction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DETAILS CONTENT IS UNDER CONSTRUCTION"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:text="DETAILS CONTENT IS UNDER CONSTRUCTION"
+
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/bt_to_preview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="To preview"
-        app:layout_constraintBottom_toBottomOf="parent"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_reconstruction"
-        app:layout_constraintVertical_bias="0.0" />
+
+        android:text="To preview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

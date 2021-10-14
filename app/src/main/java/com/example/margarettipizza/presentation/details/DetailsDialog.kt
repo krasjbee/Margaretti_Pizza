@@ -17,13 +17,14 @@ class DetailsDialog : BottomSheetDialogFragment() {
     ): View? = inflater.inflate(R.layout.dialog_details, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val btToPreview = view.findViewById<Button>(R.id.bt_to_preview)
+        val btToPreview: Button = view.findViewById(R.id.bt_to_preview)
         btToPreview.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.main_container, PreviewFragment::class.java, null, null)
                 .addToBackStack(null)
                 .commit()
-            this.dismiss()
+            //hide this dialog after navigate to other screen
+            dismiss()
         }
         super.onViewCreated(view, savedInstanceState)
     }

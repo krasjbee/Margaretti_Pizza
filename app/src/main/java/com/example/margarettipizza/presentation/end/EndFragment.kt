@@ -6,19 +6,17 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.margarettipizza.R
 import com.example.margarettipizza.presentation.menu.MenuFragment
+import com.example.margarettipizza.utils.clearBackStack
 
 class EndFragment : Fragment(R.layout.fragment_end) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val btToMenu = view.findViewById<Button>(R.id.bt_to_menu)
+        val btToMenu: Button = view.findViewById(R.id.bt_to_menu)
         btToMenu.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.main_container, MenuFragment::class.java, null, null)
                 .commit()
-
-            for (i in 0..parentFragmentManager.backStackEntryCount) {
-                parentFragmentManager.popBackStack()
-            }
-
+            //clear backstack to prevent some weird flow and not get back after order is finished
+            parentFragmentManager.clearBackStack()
         }
         super.onViewCreated(view, savedInstanceState)
     }
