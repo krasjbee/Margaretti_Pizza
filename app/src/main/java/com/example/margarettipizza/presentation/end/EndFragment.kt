@@ -6,7 +6,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.margarettipizza.R
 import com.example.margarettipizza.presentation.menu.MenuFragment
-import com.example.margarettipizza.utils.clearBackStack
+import com.example.margarettipizza.utils.clearAllBackStack
 
 class EndFragment : Fragment(R.layout.fragment_end) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -16,7 +16,7 @@ class EndFragment : Fragment(R.layout.fragment_end) {
                 .replace(R.id.main_container, MenuFragment::class.java, null, null)
                 .commit()
             //clear backstack to prevent some weird flow and not get back after order is finished
-            parentFragmentManager.clearBackStack()
+            parentFragmentManager.clearAllBackStack()
         }
         super.onViewCreated(view, savedInstanceState)
     }
