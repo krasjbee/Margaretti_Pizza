@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     
     <color name="main_theme_color">#FFD089</color>
+    <color name="text_color_black">#424242</color>
 </resources>
