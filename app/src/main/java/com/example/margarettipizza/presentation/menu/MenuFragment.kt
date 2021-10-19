@@ -29,7 +29,7 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
             rvPizzaList.apply {
                 adapter = pizzaListAdapter
                 layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-                addItemDecoration(MarginItemDecoration(requireContext(), 30))
+                addItemDecoration(MarginItemDecoration(requireContext(), 24))
             }
         }
         // FIXME: 19.10.2021 delete , used for test

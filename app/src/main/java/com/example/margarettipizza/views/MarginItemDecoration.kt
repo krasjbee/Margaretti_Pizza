@@ -18,6 +18,7 @@ class MarginItemDecoration(private val context: Context, private val spaceSizeDp
             if (parent.getChildAdapterPosition(view) == 0) {
                 top = spaceSizePx
             }
+            // FIXME: 19.10.2021 right and left margins
             left = spaceSizePx
             right = spaceSizePx
             bottom = spaceSizePx

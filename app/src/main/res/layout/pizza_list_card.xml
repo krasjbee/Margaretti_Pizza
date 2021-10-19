@@ -17,7 +17,7 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/siv_pizza_pic"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="134.47dp"
 
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
@@ -26,7 +26,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/PizzaPicAppearance"
             tools:src="@tools:sample/avatars" />
-
+        <!--FIXME lineHeight-->
         <TextView
             android:id="@+id/tv_pizza_name"
             android:layout_width="wrap_content"
@@ -34,29 +34,41 @@
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/siv_pizza_pic"
+
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="8.94dp"
+            android:textAppearance="@style/PizzaText.Name"
             tools:text="@tools:sample/lorem" />
 
         <TextView
             android:id="@+id/tv_pizza_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
 
             android:ellipsize="end"
             android:maxLines="1"
             app:layout_constraintEnd_toStartOf="@id/tv_pizza_price"
-
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_pizza_name"
+
+            android:layout_marginEnd="17.45dp"
+            android:textAppearance="@style/PizzaText.Description"
+            android:textSize="12sp"
             tools:text="@tools:sample/lorem/random" />
 
         <TextView
             android:id="@+id/tv_pizza_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="14dp"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
 
+            android:layout_marginBottom="15dp"
+            android:textAppearance="@style/PizzaText.Price"
+            android:textSize="22sp"
             tools:text="@tools:sample/lorem" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
