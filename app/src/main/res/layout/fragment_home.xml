@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <!--Todo add toolbar and search-->
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/background_color">
+
     <!--Todo add bottom panel -->
     <!--    <com.google.android.material.appbar.AppBarLayout-->
     <!--        android:layout_width="match_parent"-->
@@ -19,16 +20,20 @@
     <!--            app:menu="@menu/top_app_bar"-->
     <!--            style="@style/Widget.MaterialComponents.Toolbar.Primary.Qwe"/>-->
     <!--    </com.google.android.material.appbar.AppBarLayout>-->
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
+
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
         android:layout_marginTop="16dp"
         android:layout_marginEnd="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+
         app:title="HOME"
         app:titleMargin="0dp">
 
@@ -36,33 +41,15 @@
             android:id="@+id/sv_pizza_filter"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:iconifiedByDefault="true"
+
             android:layout_gravity="end"
+            android:iconifiedByDefault="true"
             android:layoutDirection="ltr"
             android:maxWidth="600dp"
             android:imeOptions="actionSearch"
             app:searchHintIcon="@null" />
     </androidx.appcompat.widget.Toolbar>
 
-
-    <!--    <SearchView-->
-    <!--        android:id="@+id/sv_pizza_search"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="42dp"-->
-
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-
-    <!--        android:layout_marginTop="16dp"-->
-    <!--        android:layout_marginStart="25dp"-->
-    <!--        android:layout_marginEnd="25dp"-->
-    <!--        android:layoutDirection="rtl"-->
-    <!--        android:imeOptions="actionSearch"-->
-
-    <!--todo try out searchbar in topbar by styles-->
-    <!--https://stackoverflow.com/questions/36905036/how-to-move-searchview-s-search-icon-to-the-right-side-->
-    <!--fixme topmargin-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_pizza_list"
         android:layout_width="0dp"
@@ -70,7 +57,7 @@
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
 
