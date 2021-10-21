@@ -58,7 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_pizza_name"
-
+        app:layout_constraintBottom_toTopOf="@id/bottm_bar"
 
         android:layout_marginBottom="25dp"
         android:layout_marginStart="25dp"
@@ -71,15 +71,53 @@
         android:ellipsize="end"
         tools:text="@tools:sample/lorem/random" />
 
-    <!--    <com.google.android.material.card.MaterialCardView-->
-    <!--        android:id="@+id/bottm_bar"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="95dp"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent">-->
-    <!--        -->
-    <!--    </com.google.android.material.card.MaterialCardView>-->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/bottm_bar"
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/ll_clickable"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bottom_button_shape"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_add_to_card"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="19dp"
+                android:layout_weight="1"
+                android:text="@string/text_add_to_cart"
+                android:textAppearance="@style/PizzaText.Details.AddtoCart" />
+
+            <TextView
+                android:id="@+id/tv_pizza_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginTop="19dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="19dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textAppearance="@style/PizzaText.Details.AddtoCart"
+                tools:text="@tools:sample/lorem" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

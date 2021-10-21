@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Margaretti Pizza</string>
+    <string name="text_add_to_cart">Add to cart</string>
+    <string name="ruble_symbol">%d₽</string>
 </resources>

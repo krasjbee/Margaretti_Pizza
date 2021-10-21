@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.example.margarettipizza.R
 import com.example.margarettipizza.databinding.DialogDetailsBinding
 import com.example.margarettipizza.presentation.menu.MenuFragment
+import com.example.margarettipizza.presentation.preview.PreviewFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class DetailsDialog : BottomSheetDialogFragment() {
@@ -35,9 +37,18 @@ class DetailsDialog : BottomSheetDialogFragment() {
                     .into(sivPizzaPic)
                 tvPizzaName.text = pizza.name
                 tvPizzaDescription.text = pizza.description
+                tvPizzaPrice.text =
+                    String.format(getString(R.string.ruble_symbol), pizza.price.toInt())
+                llClickable.setOnClickListener {
+                    parentFragmentManager.commit {
+                        replace(R.id.main_container, PreviewFragment::class.java, null, null)
+                        addToBackStack(null)
+                    }
+                    //hide this dialog after navigate to other screen
+                    dismiss()
+                }
             }
         }
-
         super.onViewCreated(view, savedInstanceState)
     }
 }
