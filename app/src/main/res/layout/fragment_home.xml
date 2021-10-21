@@ -33,15 +33,15 @@
         app:titleMargin="0dp">
 
         <SearchView
-            android:id="@+id/search_qwe"
+            android:id="@+id/sv_pizza_filter"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:iconifiedByDefault="true"
             android:layout_gravity="end"
             android:layoutDirection="ltr"
-            android:background="@drawable/qwe"
             android:maxWidth="600dp"
-            app:searchHintIcon="@null"></SearchView>
+            android:imeOptions="actionSearch"
+            app:searchHintIcon="@null" />
     </androidx.appcompat.widget.Toolbar>
 
 

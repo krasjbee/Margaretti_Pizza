@@ -3,6 +3,7 @@ package com.example.margarettipizza.presentation.menu
 import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -41,17 +42,29 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
                 addItemDecoration(MarginItemDecoration(requireContext(), 25))
             }
 
-            searchQwe.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    query?.let { viewModel.filterByName(it) }
-                    return true
-                }
+            svPizzaFilter.apply {
+                setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                    override fun onQueryTextSubmit(query: String?): Boolean {
+                        query?.let { query ->
+                            viewModel.filterByName(query)
+                        }
 
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    return true
+                        return true
+                    }
+
+                    override fun onQueryTextChange(newText: String?): Boolean {
+                        return true
+                    }
+                }
+                )
+                setOnSearchClickListener {
+                    background = ResourcesCompat.getDrawable(resources, R.drawable.qwe, null)
+                }
+                setOnCloseListener {
+                    background = ResourcesCompat.getDrawable(resources, R.color.white, null)
+                    false
                 }
             }
-            )
         }
 
         viewModel.pizzaList.observe(viewLifecycleOwner) { pizzaList ->

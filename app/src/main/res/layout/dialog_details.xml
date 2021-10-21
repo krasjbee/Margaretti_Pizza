@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="525dp">
+    android:layout_height="wrap_content">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/siv_pizza_pic"
@@ -43,6 +43,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
+        android:layout_marginBottom="25dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="13dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,5 +54,9 @@
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_pizza_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+
         tools:text="@tools:sample/lorem/random" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
