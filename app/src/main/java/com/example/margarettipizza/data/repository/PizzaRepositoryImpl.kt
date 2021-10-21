@@ -8,10 +8,15 @@ class PizzaRepositoryImpl : PizzaRepository {
 
     override fun getAll(): List<PizzaEntity> = PizzaDatabase.pizzaDao.getAll()
 
-    override fun getByName(name: String): List<PizzaEntity> =
+    override fun getByName(query: String): List<PizzaEntity> =
         PizzaDatabase.pizzaDao.query { pizzaList ->
             pizzaList.filter { pizza ->
-                pizza.name == name
+                pizza.name.contains(query)
+//                        ||pizza.description.contains(query)
             }
         }
+
+    override fun getPizzaById(id: Int): PizzaEntity? {
+        return PizzaDatabase.pizzaDao.getById(id)
+    }
 }

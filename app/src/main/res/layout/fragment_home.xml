@@ -36,10 +36,12 @@
             android:id="@+id/search_qwe"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:iconifiedByDefault="true"
             android:layout_gravity="end"
+            android:layoutDirection="ltr"
             android:background="@drawable/qwe"
-            android:layoutDirection="rtl"
-            android:maxWidth="600dp" />
+            android:maxWidth="600dp"
+            app:searchHintIcon="@null"></SearchView>
     </androidx.appcompat.widget.Toolbar>
 
 

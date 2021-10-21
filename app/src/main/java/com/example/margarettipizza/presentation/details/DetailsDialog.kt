@@ -4,15 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.margarettipizza.R
 import com.example.margarettipizza.databinding.DialogDetailsBinding
-import com.example.margarettipizza.presentation.preview.PreviewFragment
+import com.example.margarettipizza.presentation.menu.MenuFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class DetailsDialog : BottomSheetDialogFragment() {
 
     private val binding by viewBinding(DialogDetailsBinding::bind)
+    private val viewModel by viewModels<DetailsViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,18 +23,17 @@ class DetailsDialog : BottomSheetDialogFragment() {
     ): View? = inflater.inflate(R.layout.dialog_details, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val args = arguments ?: throw Exception("No element passed")
+        val id = args.getInt(MenuFragment.PIZZA_PASSED_ID_KEY)
 
-        with(binding) {
-            btToPreview.setOnClickListener {
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.main_container, PreviewFragment::class.java, null, null)
-                    .addToBackStack(null)
-                    .commit()
-                //hide this dialog after navigate to other screen
-                dismiss()
+        viewModel.getPizzaById(id)
+        viewModel.pizza.observe(viewLifecycleOwner) { pizza ->
+            with(binding) {
+                tvPizzaName.text = pizza.name
+                tvPizzaDescription.text = pizza.description
             }
         }
+
         super.onViewCreated(view, savedInstanceState)
     }
-
 }

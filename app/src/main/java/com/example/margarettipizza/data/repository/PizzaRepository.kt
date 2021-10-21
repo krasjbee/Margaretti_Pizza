@@ -12,6 +12,8 @@ interface PizzaRepository {
     /**
      *
      */
-    fun getByName(name: String): List<PizzaEntity>
+    fun getByName(query: String): List<PizzaEntity>
+
+    fun getPizzaById(id: Int): PizzaEntity?
 
 }

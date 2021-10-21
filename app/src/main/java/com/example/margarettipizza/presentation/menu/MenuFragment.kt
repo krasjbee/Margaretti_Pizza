@@ -2,14 +2,14 @@ package com.example.margarettipizza.presentation.menu
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import android.widget.SearchView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.margarettipizza.R
-import com.example.margarettipizza.data.repository.PizzaRepository
-import com.example.margarettipizza.data.repository.PizzaRepositoryImpl
 import com.example.margarettipizza.databinding.FragmentHomeBinding
 import com.example.margarettipizza.presentation.details.DetailsDialog
 import com.example.margarettipizza.views.MarginItemDecoration
@@ -17,25 +17,67 @@ import com.example.margarettipizza.views.MarginItemDecoration
 class MenuFragment : Fragment(R.layout.fragment_home) {
 
     private val binding by viewBinding(FragmentHomeBinding::bind)
+    private val viewModel by viewModels<MenuViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val pizzaListAdapter = PizzaListAdapter {
-            Toast.makeText(requireContext(), it.name, Toast.LENGTH_SHORT).show()
-            // FIXME: 19.10.2021 delete
+//        binding.toolbar.inflateMenu(R.menu.top_app_bar)
+//        val search= binding.toolbar.menu.findItem(R.id.search).actionView as SearchView
+//        binding.searchQwe.setOnSearchClickListener {
+//
+//        }
+
+
+        val pizzaListAdapter = PizzaListAdapter { seletedPizza ->
             val dets = DetailsDialog()
-            dets.show(parentFragmentManager, "qwe")
+            val bundle = bundleOf(PIZZA_PASSED_ID_KEY to seletedPizza.id)
+            dets.arguments = bundle
+            dets.show(parentFragmentManager, null)
         }
+
         with(binding) {
             rvPizzaList.apply {
                 adapter = pizzaListAdapter
                 layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-                addItemDecoration(MarginItemDecoration(requireContext(), 24))
+                addItemDecoration(MarginItemDecoration(requireContext(), 25))
             }
+
+            searchQwe.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    query?.let { viewModel.filterByName(it) }
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    return true
+                }
+            }
+            )
         }
-        // FIXME: 19.10.2021 delete , used for test
-        val repo: PizzaRepository = PizzaRepositoryImpl()
-        val list = repo.getAll()
-        pizzaListAdapter.submitList(list)
+
+        viewModel.pizzaList.observe(viewLifecycleOwner) { pizzaList ->
+            pizzaListAdapter.submitList(pizzaList)
+        }
+
         super.onViewCreated(view, savedInstanceState)
     }
+
+    //    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        inflater.inflate(R.menu.top_app_bar,menu)
+//        val menuItem = menu.findItem(R.id.search)
+//        val searchView = menuItem.actionView as SearchView
+//        searchView.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//                return true
+//            }
+//
+//            override fun onQueryTextChange(newText: String?): Boolean {
+//                return true
+//            }
+//        })
+//        super.onCreateOptionsMenu(menu, inflater)
+//    }
+    companion object {
+        const val PIZZA_PASSED_ID_KEY = "PizzaPassedId"
+    }
+
 }
