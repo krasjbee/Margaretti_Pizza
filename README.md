@@ -9,5 +9,6 @@
 - Added splashscreen
 - Added blanks for layouts
 - Added basic navigation via fragmentManager
+- Added details screen (maybe move to non-modal bottom sheet) and home recycler view
 
 ## All strings are hardcoded for now while stub buttons is in use
