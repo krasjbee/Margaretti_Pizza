@@ -12,3 +12,9 @@
 - Added details screen (maybe move to non-modal bottom sheet) and home recycler view
 
 ## All strings are hardcoded for now while stub buttons is in use
+
+## Used libs:
+
+- Android ViewModel
+- LiveData
+- Glide
