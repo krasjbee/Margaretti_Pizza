@@ -18,3 +18,10 @@
 - Android ViewModel
 - LiveData
 - Glide
+
+
+## Known problems:
+- No rounded corners (modal bottom sheet fragment)
+
+# Possible TODOS:
+- Move picture download to upper level
