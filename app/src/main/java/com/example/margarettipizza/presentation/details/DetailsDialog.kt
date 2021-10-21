@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.bumptech.glide.Glide
 import com.example.margarettipizza.R
 import com.example.margarettipizza.databinding.DialogDetailsBinding
 import com.example.margarettipizza.presentation.menu.MenuFragment
@@ -29,6 +30,9 @@ class DetailsDialog : BottomSheetDialogFragment() {
         viewModel.getPizzaById(id)
         viewModel.pizza.observe(viewLifecycleOwner) { pizza ->
             with(binding) {
+                Glide.with(this@DetailsDialog)
+                    .load(pizza.imageUrl)
+                    .into(sivPizzaPic)
                 tvPizzaName.text = pizza.name
                 tvPizzaDescription.text = pizza.description
             }

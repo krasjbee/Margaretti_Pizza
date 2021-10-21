@@ -17,4 +17,7 @@ class MenuViewModel : ViewModel() {
         _pizzaList.postValue(usecase.getByName(query))
     }
 
+    fun getPizzaList() {
+        _pizzaList.postValue(usecase.getAllPizza())
+    }
 }

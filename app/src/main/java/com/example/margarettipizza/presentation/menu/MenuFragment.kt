@@ -3,6 +3,7 @@ package com.example.margarettipizza.presentation.menu
 import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
+import androidx.activity.addCallback
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -14,6 +15,7 @@ import com.example.margarettipizza.R
 import com.example.margarettipizza.databinding.FragmentHomeBinding
 import com.example.margarettipizza.presentation.details.DetailsDialog
 import com.example.margarettipizza.views.MarginItemDecoration
+import kotlin.system.exitProcess
 
 class MenuFragment : Fragment(R.layout.fragment_home) {
 
@@ -28,9 +30,9 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
 //        }
 
 
-        val pizzaListAdapter = PizzaListAdapter { seletedPizza ->
+        val pizzaListAdapter = PizzaListAdapter { selectedPizza ->
             val dets = DetailsDialog()
-            val bundle = bundleOf(PIZZA_PASSED_ID_KEY to seletedPizza.id)
+            val bundle = bundleOf(PIZZA_PASSED_ID_KEY to selectedPizza.id)
             dets.arguments = bundle
             dets.show(parentFragmentManager, null)
         }
@@ -48,7 +50,7 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
                         query?.let { query ->
                             viewModel.filterByName(query)
                         }
-
+                        // TODO: 21.10.2021 hide keyboard
                         return true
                     }
 
@@ -62,10 +64,20 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
                 }
                 setOnCloseListener {
                     background = ResourcesCompat.getDrawable(resources, R.color.white, null)
+                    viewModel.getPizzaList()
                     false
                 }
             }
+            //idk how to do it properly, pls leave your feedback on it
+            requireActivity().onBackPressedDispatcher.addCallback {
+                if (!binding.svPizzaFilter.isIconified) {
+                    binding.svPizzaFilter.isIconified = true
+                } else {
+                    exitProcess(0)
+                }
+            }
         }
+
 
         viewModel.pizzaList.observe(viewLifecycleOwner) { pizzaList ->
             pizzaListAdapter.submitList(pizzaList)
