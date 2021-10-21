@@ -6,21 +6,6 @@
     android:layout_height="match_parent"
     android:backgroundTint="@color/background_color">
 
-    <!--Todo add bottom panel -->
-    <!--    <com.google.android.material.appbar.AppBarLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        tools:ignore="MissingConstraints">-->
-    <!--        <com.google.android.material.appbar.MaterialToolbar-->
-    <!--            app:titleMarginStart="50dp"-->
-    <!--            android:id="@+id/toolbar"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="?attr/actionBarSize"-->
-    <!--            app:title="Menu"-->
-    <!--            app:menu="@menu/top_app_bar"-->
-    <!--            style="@style/Widget.MaterialComponents.Toolbar.Primary.Qwe"/>-->
-    <!--    </com.google.android.material.appbar.AppBarLayout>-->
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"

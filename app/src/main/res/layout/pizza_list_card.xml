@@ -6,11 +6,7 @@
     android:layout_height="210dp"
     app:cardCornerRadius="16dp"
     app:cardElevation="22dp">
-    <!--    TODO check is it necessary elevation-->
-    <!--TODO move typography to styles-->
-    <!--TODO extract sizes to values-->
-    <!-- fix price misalignment-->
-    <!-- TODO LineHeight-->
+
     <!-- i use constraint layout to avoid a lot of nested linear layouts-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -28,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/PizzaPicAppearance"
             tools:src="@tools:sample/avatars" />
-        <!--FIXME lineHeight-->
+
         <TextView
             android:id="@+id/tv_pizza_name"
             android:layout_width="wrap_content"
