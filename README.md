@@ -25,3 +25,6 @@
 
 # Possible TODOS:
 - Move picture download to upper level
+
+# TODOS:
+- Move dimension to values (I fogot)
