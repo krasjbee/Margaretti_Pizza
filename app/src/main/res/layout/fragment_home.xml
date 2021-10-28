@@ -19,7 +19,7 @@
         android:layout_marginEnd="25dp"
         app:layout_constraintTop_toTopOf="parent"
 
-        app:title="HOME"
+        app:title="@string/title_text_home"
         app:titleMargin="0dp">
 
         <SearchView
