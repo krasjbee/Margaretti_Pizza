@@ -8,33 +8,32 @@ import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.margarettipizza.R
+import com.example.margarettipizza.data.remote.dto.PizzaDto
 import com.example.margarettipizza.databinding.FragmentPreviewBinding
 
 class PreviewFragment : Fragment(R.layout.fragment_preview) {
 
     private val binding by viewBinding(FragmentPreviewBinding::bind)
     private val viewModel by viewModels<PreviewViewModel>()
-
-    private val pizzaName =
-        arguments?.getString(PREVIEW_PIZZA_NAME_KEY) ?: throw Exception("Element isn't passed")
-    private val pizzaImageUrls =
-        arguments?.getStringArray(PREVIEW_URL_LIST_KEY) ?: throw Exception("Element isn't passed")
+    private val pizzaId =
+        arguments?.getInt(PREVIEW_PIZZA_ID) ?: throw Exception("Element isn't passed")
+    private var pizza: PizzaDto? = null
 
     private val pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
             //sets page counter to string like 1/4
-            val pageCounter = "${position + 1}/${pizzaImageUrls.size}"
+            val pageCounter = "${position + 1}/${pizza?.imageUrls?.size}"
             binding.tvPageCounter.text = pageCounter
             super.onPageSelected(position)
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        pizza = viewModel.getPizzaById(pizzaId)
         val viewPagerAdapter = ImageGalleryAdapter()
 
         with(binding) {
-            tvTitle.text = pizzaName
+            tvTitle.text = pizza?.name
             //Setting up viewPager
             vpPizzaGallery.apply {
                 adapter = viewPagerAdapter
@@ -42,7 +41,7 @@ class PreviewFragment : Fragment(R.layout.fragment_preview) {
                 registerOnPageChangeCallback(pageChangeCallback)
             }
         }
-        viewPagerAdapter.setList(pizzaImageUrls)
+        pizza?.imageUrls?.let { viewPagerAdapter.setList(it) }
 
         super.onViewCreated(view, savedInstanceState)
     }
@@ -54,17 +53,13 @@ class PreviewFragment : Fragment(R.layout.fragment_preview) {
 
     companion object {
         @JvmStatic
-        fun newInstance(pizzaName: String, imageUrls: List<String>): PreviewFragment {
-            val args = bundleOf(
-                PREVIEW_PIZZA_NAME_KEY to pizzaName,
-                PREVIEW_URL_LIST_KEY to imageUrls.toTypedArray()
-            )
+        fun newInstance(pizzaId: Int): PreviewFragment {
+            val args = bundleOf()
             val fragment = PreviewFragment()
             fragment.arguments = args
             return fragment
         }
 
-        const val PREVIEW_PIZZA_NAME_KEY = "TO_PREVIEW_NAME_KEY"
-        const val PREVIEW_URL_LIST_KEY = "PREVIEW_URL_LIST_KEY"
+        const val PREVIEW_PIZZA_ID = "PREVIEW_PIZZA_ID"
     }
 }

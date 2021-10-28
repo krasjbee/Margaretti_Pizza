@@ -43,7 +43,7 @@ class DetailsDialog : BottomSheetDialogFragment() {
                     parentFragmentManager.commit {
                         replace(
                             R.id.main_container,
-                            PreviewFragment.newInstance(pizza.name, pizza.imageUrls)
+                            PreviewFragment.newInstance(pizza.id)
                         )
                         addToBackStack(null)
                     }
