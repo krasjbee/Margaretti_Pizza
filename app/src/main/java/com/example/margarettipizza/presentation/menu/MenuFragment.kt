@@ -29,7 +29,7 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
 //
 //        }
 
-
+        //Creating rv adapter
         val pizzaListAdapter = PizzaListAdapter { selectedPizza ->
             val dets = DetailsDialog()
             val bundle = bundleOf(PIZZA_PASSED_ID_KEY to selectedPizza.id)
@@ -38,12 +38,14 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
         }
 
         with(binding) {
+            //Setting up rv
             rvPizzaList.apply {
                 adapter = pizzaListAdapter
                 layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
                 addItemDecoration(MarginItemDecoration(requireContext(), 25))
             }
 
+            //Setting up searchview query handling
             svPizzaFilter.apply {
                 setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                     override fun onQueryTextSubmit(query: String?): Boolean {
@@ -60,8 +62,13 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
                 }
                 )
                 setOnSearchClickListener {
-                    background = ResourcesCompat.getDrawable(resources, R.drawable.qwe, null)
+                    background = ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.search_view_background,
+                        null
+                    )
                 }
+//                Setting up searchview background if it's closed
                 setOnCloseListener {
                     background = ResourcesCompat.getDrawable(resources, R.color.white, null)
                     viewModel.getPizzaList()
@@ -69,6 +76,8 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
                 }
             }
             //idk how to do it properly, pls leave your feedback on it
+            //if searchview query is not empty - clear it , else close app
+            // TODO: 27.10.2021 clear search query?
             requireActivity().onBackPressedDispatcher.addCallback {
                 if (!binding.svPizzaFilter.isIconified) {
                     binding.svPizzaFilter.isIconified = true
