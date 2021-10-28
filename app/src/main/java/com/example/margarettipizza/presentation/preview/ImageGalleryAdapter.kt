@@ -7,9 +7,9 @@ import com.example.margarettipizza.databinding.PreviewImageViewHolderBinding
 
 class ImageGalleryAdapter : RecyclerView.Adapter<ImageViewHolder>() {
 
-    private var list = emptyList<String>()
+    private var list = emptyArray<String>()
 
-    fun setList(list: List<String>) {
+    fun setList(list: Array<String>) {
         this.list = list
     }
 

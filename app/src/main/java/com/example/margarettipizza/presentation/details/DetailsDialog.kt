@@ -10,7 +10,6 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.example.margarettipizza.R
 import com.example.margarettipizza.databinding.DialogDetailsBinding
-import com.example.margarettipizza.presentation.menu.MenuFragment
 import com.example.margarettipizza.presentation.preview.PreviewFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -27,21 +26,25 @@ class DetailsDialog : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val args = arguments ?: throw Exception("No element passed")
-        val id = args.getInt(MenuFragment.PIZZA_PASSED_ID_KEY)
+        val id = args.getInt(PIZZA_PASSED_ID_KEY)
 
         viewModel.getPizzaById(id)
         viewModel.pizza.observe(viewLifecycleOwner) { pizza ->
             with(binding) {
                 Glide.with(this@DetailsDialog)
-                    .load(pizza.imageUrl)
+                    .load(pizza.imageUrls[0])
                     .into(sivPizzaPic)
                 tvPizzaName.text = pizza.name
                 tvPizzaDescription.text = pizza.description
+                //todo move to viewModel
                 tvPizzaPrice.text =
                     String.format(getString(R.string.ruble_symbol), pizza.price.toInt())
                 llClickable.setOnClickListener {
                     parentFragmentManager.commit {
-                        replace(R.id.main_container, PreviewFragment::class.java, null, null)
+                        replace(
+                            R.id.main_container,
+                            PreviewFragment.newInstance(pizza.name, pizza.imageUrls)
+                        )
                         addToBackStack(null)
                     }
                     //hide this dialog after navigate to other screen
@@ -50,5 +53,9 @@ class DetailsDialog : BottomSheetDialogFragment() {
             }
         }
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    companion object {
+        const val PIZZA_PASSED_ID_KEY = "PizzaPassedId"
     }
 }
