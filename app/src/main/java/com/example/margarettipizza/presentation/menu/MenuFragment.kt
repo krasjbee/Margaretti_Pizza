@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.margarettipizza.R
-import com.example.margarettipizza.data.remote.NetworkModule
+import com.example.margarettipizza.data.remote.dto.PizzaDto
 import com.example.margarettipizza.databinding.FragmentHomeBinding
 import com.example.margarettipizza.presentation.details.DetailsDialog
 import com.example.margarettipizza.presentation.details.DetailsDialog.Companion.PIZZA_PASSED_ID_KEY
@@ -22,7 +22,6 @@ import com.example.margarettipizza.utils.hideKeyboard
 import com.example.margarettipizza.views.MarginItemDecoration
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlin.system.exitProcess
 
 class MenuFragment : Fragment(R.layout.fragment_home) {
@@ -53,6 +52,7 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
             svPizzaFilter.apply {
                 setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                     override fun onQueryTextSubmit(query: String?): Boolean {
+                        val list = mutableListOf<PizzaDto>()
                         query?.let { query ->
                             viewModel.filterByName(query)
                         }
@@ -62,12 +62,24 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
                                 "rxGetByName: ${it.hashCode()} "
                             )
                         }?.doOnSubscribe {
-                            Log.d("qwe", "onViewCreated: subed 1")
+                            Log.d("doonsubscribe", "onViewCreated: subed 1")
                         }?.doOnEach {
-                            Log.d("qwe", "onViewCreated:2 ${it.value} ")
-                        }?.subscribe {
-                            Log.d("qwe", "onViewCreated:$it ")
+                            Log.d("qweqwe", "onViewCreated:2 ${it.value} ")
+                        }?.collectInto(list, { l, e ->
+                            l.add(e).also { Log.d("element", "onQueryTextSubmit1: $e $l ") }
+                                .also { Log.d("elementlist", "onQueryTextSubmit1: $l ") }
+                        })?.subscribeOn(AndroidSchedulers.mainThread())?.doOnSuccess {
+                            Log.d(
+                                "success",
+                                "onQueryTextSubmit:$it "
+                            )
+                        }?.doOnError {
+                            Log.d("doonerror", "onQueryTextSubmit:$it ")
                         }
+                            ?.subscribe({
+                                pizzaListAdapter.submitList(it)
+                                Log.d("subqwe", "onQueryTextSubmit: ")
+                            }, {})
                         hideKeyboard()
                         return true
                     }
@@ -104,6 +116,7 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
                 }
             }
         }
+
         val list = viewModel.pizzaList.doOnSubscribe {
             Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
         }.observeOn(AndroidSchedulers.mainThread()).subscribe(
@@ -113,15 +126,6 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
             }
         )
-
-        val qwe = NetworkModule.retrofit
-        view.postDelayed({
-            qwe.getAllPizza().subscribeOn(Schedulers.io()).subscribe()
-        }, 3000)
-
-//        viewModel.pizzaList.observe(viewLifecycleOwner) { pizzaList ->
-//            pizzaListAdapter.submitList(pizzaList)
-//        }
 
         disposable.add(list)
         super.onViewCreated(view, savedInstanceState)
