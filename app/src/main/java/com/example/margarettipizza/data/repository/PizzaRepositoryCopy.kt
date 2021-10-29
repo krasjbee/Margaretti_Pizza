@@ -1,6 +1,5 @@
 package com.example.margarettipizza.data.repository
 
-import com.example.margarettipizza.data.apiStub.PizzaEntity
 import com.example.margarettipizza.data.remote.dto.PizzaDto
 import io.reactivex.rxjava3.core.Single
 
@@ -16,6 +15,6 @@ interface PizzaRepositoryCopy {
      */
     fun getByName(query: String): Single<List<PizzaDto>>
 
-    fun getPizzaById(id: Int): PizzaEntity?
+    fun getPizzaById(id: Int): Single<PizzaDto>
 
 }

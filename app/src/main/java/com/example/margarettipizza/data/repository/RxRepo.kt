@@ -1,6 +1,5 @@
 package com.example.margarettipizza.data.repository
 
-import com.example.margarettipizza.data.apiStub.PizzaEntity
 import com.example.margarettipizza.data.remote.NetworkModule
 import com.example.margarettipizza.data.remote.dto.PizzaDto
 import io.reactivex.rxjava3.core.Single
@@ -18,7 +17,7 @@ class RxRepo : PizzaRepositoryCopy {
         return remoteDataSource.getAllPizza().subscribeOn(Schedulers.io())
     }
 
-    override fun getPizzaById(id: Int): PizzaEntity? {
-        TODO("Not yet implemented")
+    override fun getPizzaById(id: Int): Single<PizzaDto> {
+        return remoteDataSource.getPizzaById(id).subscribeOn(Schedulers.io())
     }
 }

@@ -52,6 +52,7 @@
 
             android:textAppearance="@style/PizzaText.Name"
             android:textSize="18sp"
+            android:textColor="@color/white"
             tools:text="@tools:sample/lorem"
             tools:textColor="@color/white" />
     </Toolbar>

@@ -12,7 +12,7 @@ interface PizzaRemoteApi {
     fun getAllPizza(): Single<List<PizzaDto>>
 
     @GET("pizza/{id}")
-    fun getPizzaById(@Path("id") id: Int): Single<List<PizzaDto>>
+    fun getPizzaById(@Path("id") id: Int): Single<PizzaDto>
 
 //    //check if return is necessary
 //    @POST("pizza/order")

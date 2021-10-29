@@ -1,6 +1,7 @@
 package com.example.margarettipizza.presentation.details
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.example.margarettipizza.R
 import com.example.margarettipizza.databinding.DialogDetailsBinding
 import com.example.margarettipizza.presentation.preview.PreviewFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 
 class DetailsDialog : BottomSheetDialogFragment() {
 
@@ -28,8 +30,8 @@ class DetailsDialog : BottomSheetDialogFragment() {
         val args = arguments ?: throw Exception("No element passed")
         val id = args.getInt(PIZZA_PASSED_ID_KEY)
 
-        viewModel.getPizzaById(id)
-        viewModel.pizza.observe(viewLifecycleOwner) { pizza ->
+        val pizzaStream = viewModel.getPizzaById(id)
+        pizzaStream.observeOn(AndroidSchedulers.mainThread()).subscribe({ pizza ->
             with(binding) {
                 Glide.with(this@DetailsDialog)
                     .load(pizza.imageUrls[0])
@@ -51,7 +53,11 @@ class DetailsDialog : BottomSheetDialogFragment() {
                     dismiss()
                 }
             }
-        }
+
+        }, {})
+//        viewModel.pizza.observe(viewLifecycleOwner) { pizza ->
+//
+//        }
         super.onViewCreated(view, savedInstanceState)
     }
 
