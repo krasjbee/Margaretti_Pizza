@@ -2,13 +2,13 @@ package com.example.margarettipizza.domain.usecase
 
 import android.util.Log
 import com.example.margarettipizza.data.remote.dto.PizzaDto
-import com.example.margarettipizza.data.repository.PizzaRepositoryCopy
-import com.example.margarettipizza.data.repository.RxRepo
+import com.example.margarettipizza.data.repository.PizzaRepository
+import com.example.margarettipizza.data.repository.PizzaRepositoryImpl
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 
 class PizzaListUsecase {
-    private val repository: PizzaRepositoryCopy = RxRepo()
+    private val repository: PizzaRepository = PizzaRepositoryImpl()
 
     fun getAllPizza(): Single<List<PizzaDto>> {
         return repository.getAll()
