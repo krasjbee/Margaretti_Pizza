@@ -56,30 +56,13 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
                         query?.let { query ->
                             viewModel.filterByName(query)
                         }
-                        val qwe = viewModel.filtredList?.also {
-                            Log.d(
-                                "hash",
-                                "rxGetByName: ${it.hashCode()} "
-                            )
-                        }?.doOnSubscribe {
+                        val qwe = viewModel.filtredList?.doOnSubscribe {
                             Log.d("doonsubscribe", "onViewCreated: subed 1")
-                        }?.doOnEach {
-                            Log.d("qweqwe", "onViewCreated:2 ${it.value} ")
                         }?.collectInto(list, { l, e ->
-                            l.add(e).also { Log.d("element", "onQueryTextSubmit1: $e $l ") }
-                                .also { Log.d("elementlist", "onQueryTextSubmit1: $l ") }
-                        })?.subscribeOn(AndroidSchedulers.mainThread())?.doOnSuccess {
-                            Log.d(
-                                "success",
-                                "onQueryTextSubmit:$it "
-                            )
-                        }?.doOnError {
-                            Log.d("doonerror", "onQueryTextSubmit:$it ")
-                        }
-                            ?.subscribe({
-                                pizzaListAdapter.submitList(it)
-                                Log.d("subqwe", "onQueryTextSubmit: ")
-                            }, {})
+                            l.add(e)
+                        })?.subscribeOn(AndroidSchedulers.mainThread())?.subscribe({
+                            pizzaListAdapter.submitList(it)
+                        }, {}, disposable)
                         hideKeyboard()
                         return true
                     }
