@@ -1,13 +1,12 @@
 package com.example.margarettipizza.presentation.menu
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -56,13 +55,14 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
                         query?.let { query ->
                             viewModel.filterByName(query)
                         }
-                        val qwe = viewModel.filtredList?.doOnSubscribe {
-                            Log.d("doonsubscribe", "onViewCreated: subed 1")
+                        val filteredListStream = viewModel.filtredList?.doOnSubscribe {
+                            showLoad(true)
                         }?.collectInto(list, { l, e ->
                             l.add(e)
                         })?.subscribeOn(AndroidSchedulers.mainThread())?.subscribe({
                             pizzaListAdapter.submitList(it)
-                        }, {}, disposable)
+                            showLoad(false)
+                        }, { showLoad(false) }, disposable)
                         hideKeyboard()
                         return true
                     }
@@ -101,16 +101,16 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
         }
 
         val list = viewModel.pizzaList.doOnSubscribe {
-            Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
+            showLoad(true)
         }.observeOn(AndroidSchedulers.mainThread()).subscribe(
             {
                 pizzaListAdapter.submitList(it)
+                showLoad(false)
             }, {
-                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
-            }
+                showLoad(false)
+            }, disposable
         )
 
-        disposable.add(list)
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -119,5 +119,9 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
         super.onDestroy()
     }
 
+    private fun showLoad(isLoad: Boolean) {
+        binding.groupMenuContent.isVisible = !isLoad
+        binding.piLoading.isVisible = isLoad
+    }
 
 }

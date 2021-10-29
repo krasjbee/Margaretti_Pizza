@@ -1,7 +1,6 @@
 package com.example.margarettipizza.presentation.details
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,9 +54,7 @@ class DetailsDialog : BottomSheetDialogFragment() {
             }
 
         }, {})
-//        viewModel.pizza.observe(viewLifecycleOwner) { pizza ->
-//
-//        }
+
         super.onViewCreated(view, savedInstanceState)
     }
 

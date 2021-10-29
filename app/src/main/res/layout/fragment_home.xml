@@ -6,17 +6,38 @@
     android:layout_height="match_parent"
     android:backgroundTint="@color/background_color">
 
+    <!--if something is added it's easier to use groups-->
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_menu_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="rv_pizza_list" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/pi_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+
+        android:indeterminate="true"
+        android:visibility="gone"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
 
         android:layout_marginStart="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-
         android:layout_marginTop="16dp"
         android:layout_marginEnd="25dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
 
         app:title="@string/title_text_home"
@@ -29,9 +50,9 @@
 
             android:layout_gravity="end"
             android:iconifiedByDefault="true"
+            android:imeOptions="actionSearch"
             android:layoutDirection="ltr"
             android:maxWidth="600dp"
-            android:imeOptions="actionSearch"
             app:searchHintIcon="@null" />
     </androidx.appcompat.widget.Toolbar>
 
@@ -40,13 +61,13 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
         android:layout_marginTop="75dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/pizza_list_card" />
 
 
