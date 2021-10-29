@@ -59,7 +59,7 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
                             showLoad(true)
                         }?.collectInto(list, { l, e ->
                             l.add(e)
-                        })?.subscribeOn(AndroidSchedulers.mainThread())?.subscribe({
+                        })?.observeOn(AndroidSchedulers.mainThread())?.subscribe({
                             pizzaListAdapter.submitList(it)
                             showLoad(false)
                         }, { showLoad(false) }, disposable)
@@ -82,7 +82,16 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
 //                Setting up searchview background if it's closed
                 setOnCloseListener {
                     background = ResourcesCompat.getDrawable(resources, R.color.white, null)
-                    viewModel.getPizzaList()
+                    val list = viewModel.pizzaList.doOnSubscribe {
+                        showLoad(true)
+                    }.observeOn(AndroidSchedulers.mainThread()).subscribe(
+                        {
+                            pizzaListAdapter.submitList(it)
+                            showLoad(false)
+                        }, {
+                            showLoad(false)
+                        }, disposable
+                    )
                     false
                 }
             }
