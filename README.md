@@ -16,12 +16,15 @@
 ## Used libs:
 
 - Android ViewModel
-- LiveData
+- ~~LiveData~~
 - Glide
+- RxJava 3
 
 
 ## Known problems:
+
 - No rounded corners (modal bottom sheet fragment)
+- **It's ugly after adding RX , i'll fix it till next homework**
 
 # Possible TODOS:
 - Move picture download to upper level
