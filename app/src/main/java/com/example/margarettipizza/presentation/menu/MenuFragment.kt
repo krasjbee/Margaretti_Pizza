@@ -1,8 +1,10 @@
 package com.example.margarettipizza.presentation.menu
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
@@ -12,22 +14,24 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.margarettipizza.R
+import com.example.margarettipizza.data.remote.NetworkModule
 import com.example.margarettipizza.databinding.FragmentHomeBinding
 import com.example.margarettipizza.presentation.details.DetailsDialog
+import com.example.margarettipizza.presentation.details.DetailsDialog.Companion.PIZZA_PASSED_ID_KEY
+import com.example.margarettipizza.utils.hideKeyboard
 import com.example.margarettipizza.views.MarginItemDecoration
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlin.system.exitProcess
 
 class MenuFragment : Fragment(R.layout.fragment_home) {
 
     private val binding by viewBinding(FragmentHomeBinding::bind)
     private val viewModel by viewModels<MenuViewModel>()
+    private val disposable = CompositeDisposable()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        binding.toolbar.inflateMenu(R.menu.top_app_bar)
-//        val search= binding.toolbar.menu.findItem(R.id.search).actionView as SearchView
-//        binding.searchQwe.setOnSearchClickListener {
-//
-//        }
 
         //Creating rv adapter
         val pizzaListAdapter = PizzaListAdapter { selectedPizza ->
@@ -52,7 +56,19 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
                         query?.let { query ->
                             viewModel.filterByName(query)
                         }
-                        // TODO: 21.10.2021 hide keyboard
+                        val qwe = viewModel.filtredList?.also {
+                            Log.d(
+                                "hash",
+                                "rxGetByName: ${it.hashCode()} "
+                            )
+                        }?.doOnSubscribe {
+                            Log.d("qwe", "onViewCreated: subed 1")
+                        }?.doOnEach {
+                            Log.d("qwe", "onViewCreated:2 ${it.value} ")
+                        }?.subscribe {
+                            Log.d("qwe", "onViewCreated:$it ")
+                        }
+                        hideKeyboard()
                         return true
                     }
 
@@ -80,38 +96,41 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
             // TODO: 27.10.2021 clear search query?
             requireActivity().onBackPressedDispatcher.addCallback {
                 if (!binding.svPizzaFilter.isIconified) {
-                    binding.svPizzaFilter.isIconified = true
+                    binding.svPizzaFilter.onActionViewCollapsed()
+                    binding.svPizzaFilter.background =
+                        ResourcesCompat.getDrawable(resources, R.color.white, null)
                 } else {
                     exitProcess(0)
                 }
             }
         }
+        val list = viewModel.pizzaList.doOnSubscribe {
+            Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
+        }.observeOn(AndroidSchedulers.mainThread()).subscribe(
+            {
+                pizzaListAdapter.submitList(it)
+            }, {
+                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+            }
+        )
 
+        val qwe = NetworkModule.retrofit
+        view.postDelayed({
+            qwe.getAllPizza().subscribeOn(Schedulers.io()).subscribe()
+        }, 3000)
 
-        viewModel.pizzaList.observe(viewLifecycleOwner) { pizzaList ->
-            pizzaListAdapter.submitList(pizzaList)
-        }
+//        viewModel.pizzaList.observe(viewLifecycleOwner) { pizzaList ->
+//            pizzaListAdapter.submitList(pizzaList)
+//        }
 
+        disposable.add(list)
         super.onViewCreated(view, savedInstanceState)
     }
 
-    //    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        inflater.inflate(R.menu.top_app_bar,menu)
-//        val menuItem = menu.findItem(R.id.search)
-//        val searchView = menuItem.actionView as SearchView
-//        searchView.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
-//            override fun onQueryTextSubmit(query: String?): Boolean {
-//                return true
-//            }
-//
-//            override fun onQueryTextChange(newText: String?): Boolean {
-//                return true
-//            }
-//        })
-//        super.onCreateOptionsMenu(menu, inflater)
-//    }
-    companion object {
-        const val PIZZA_PASSED_ID_KEY = "PizzaPassedId"
+    override fun onDestroy() {
+        disposable.clear()
+        super.onDestroy()
     }
+
 
 }

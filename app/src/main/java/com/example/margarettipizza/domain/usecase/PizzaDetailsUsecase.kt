@@ -1,9 +1,13 @@
 package com.example.margarettipizza.domain.usecase
 
-import com.example.margarettipizza.data.repository.PizzaRepository
-import com.example.margarettipizza.data.repository.PizzaRepositoryImpl
+//import com.example.margarettipizza.data.repository.PizzaRepositoryImpl
+import com.example.margarettipizza.data.remote.dto.PizzaDto
+import com.example.margarettipizza.data.repository.PizzaRepositoryCopy
+import com.example.margarettipizza.data.repository.RxRepo
 
 class PizzaDetailsUsecase {
-    private val repository: PizzaRepository = PizzaRepositoryImpl()
-    operator fun invoke(id: Int) = requireNotNull(repository.getPizzaById(id))
+    private val repository: PizzaRepositoryCopy = RxRepo()
+
+    // FIXME: 28.10.2021 change from fixed list
+    operator fun invoke(id: Int) = PizzaDto("qwe", 1, emptyList(), "qwe", 60.0)
 }
