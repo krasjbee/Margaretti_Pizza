@@ -27,7 +27,7 @@ class PizzaListAdapter(private val onClick: (PizzaDto) -> Unit) :
             override fun areContentsTheSame(oldItem: PizzaDto, newItem: PizzaDto): Boolean =
                 newItem.name == oldItem.name &&
                         newItem.description == oldItem.description &&
-                        newItem.imageUrls[0] == oldItem.imageUrls[0] &&
+                        newItem.imageUrls.first() == oldItem.imageUrls.first() &&
                         newItem.price == oldItem.price
         }
     }

@@ -22,7 +22,7 @@ import com.example.margarettipizza.views.MarginItemDecoration
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import kotlin.system.exitProcess
-
+//fixme cleanup
 class MenuFragment : Fragment(R.layout.fragment_home) {
 
     private val binding by viewBinding(FragmentHomeBinding::bind)
@@ -108,7 +108,7 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
                 }
             }
         }
-
+        //fixme add handle error and loading normally
         val list = viewModel.pizzaList.doOnSubscribe {
             showLoad(true)
         }.observeOn(AndroidSchedulers.mainThread()).subscribe(

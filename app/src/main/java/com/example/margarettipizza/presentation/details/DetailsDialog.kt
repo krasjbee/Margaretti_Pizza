@@ -19,6 +19,7 @@ class DetailsDialog : BottomSheetDialogFragment() {
     private val binding by viewBinding(DialogDetailsBinding::bind)
     private val viewModel by viewModels<DetailsViewModel>()
 
+    //fixme inflater and binding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -30,6 +31,7 @@ class DetailsDialog : BottomSheetDialogFragment() {
         val id = args.getInt(PIZZA_PASSED_ID_KEY)
 
         val pizzaStream = viewModel.getPizzaById(id)
+        //fixme move to separate methods
         pizzaStream.observeOn(AndroidSchedulers.mainThread()).subscribe({ pizza ->
             with(binding) {
                 Glide.with(this@DetailsDialog)
@@ -40,6 +42,7 @@ class DetailsDialog : BottomSheetDialogFragment() {
                 //todo move to viewModel
                 tvPizzaPrice.text =
                     String.format(getString(R.string.ruble_symbol), pizza.price.toInt())
+                //fixme fix click listener
                 llClickable.setOnClickListener {
                     parentFragmentManager.commit {
                         replace(

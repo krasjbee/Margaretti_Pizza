@@ -11,6 +11,8 @@ import com.example.margarettipizza.R
 import com.example.margarettipizza.databinding.FragmentPreviewBinding
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 
+
+//fixme set backarrow click
 class PreviewFragment() : Fragment(R.layout.fragment_preview) {
 
     private val binding by viewBinding(FragmentPreviewBinding::bind)
@@ -36,7 +38,7 @@ class PreviewFragment() : Fragment(R.layout.fragment_preview) {
                     super.onPageSelected(position)
                 }
             }
-
+            //fixme fix warning
             with(binding) {
                 tvTitle.text = pizza.name
                 tvPageCounter.text = "1/${pizza.imageUrls}"
@@ -68,6 +70,7 @@ class PreviewFragment() : Fragment(R.layout.fragment_preview) {
             fragment.arguments = args
             return fragment
         }
+
         const val PREVIEW_PIZZA_ID = "PREVIEW_PIZZA_ID"
     }
 }
