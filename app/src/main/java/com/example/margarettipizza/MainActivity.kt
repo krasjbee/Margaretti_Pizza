@@ -1,12 +1,12 @@
 package com.example.margarettipizza
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.margarettipizza.databinding.ActivityMainBinding
 import com.example.margarettipizza.presentation.menu.MenuFragment
+import dagger.android.support.DaggerAppCompatActivity
 
-class MainActivity : AppCompatActivity(R.layout.activity_main) {
+class MainActivity : DaggerAppCompatActivity(R.layout.activity_main) {
 
     private val binding by viewBinding(ActivityMainBinding::bind)
 
