@@ -10,6 +10,7 @@ buildscript {
         rxAndroidVersion = "3.0.0"
         okhttpLoggingInterceptorVersion = "5.0.0-alpha.2"
         daggerVersion = "2.40"
+        room_version = "2.3.0"
 
     }
 

@@ -2,10 +2,8 @@ package com.example.margarettipizza.domain.usecase
 
 //import com.example.margarettipizza.data.repository.PizzaRepositoryImpl
 import com.example.margarettipizza.data.repository.PizzaRepository
-import com.example.margarettipizza.data.repository.PizzaRepositoryImpl
+import javax.inject.Inject
 
-class PizzaDetailsUsecase {
-    private val repository: PizzaRepository = PizzaRepositoryImpl()
-
+class PizzaDetailsUsecase @Inject constructor(private val repository: PizzaRepository) {
     operator fun invoke(id: Int) = repository.getPizzaById(id)
 }

@@ -1,6 +1,7 @@
 package com.example.margarettipizza.presentation.menu
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.SearchView
 import androidx.activity.addCallback
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.margarettipizza.R
 import com.example.margarettipizza.data.remote.dto.PizzaDto
+import com.example.margarettipizza.data.repository.PizzaRepository
 import com.example.margarettipizza.databinding.FragmentHomeBinding
 import com.example.margarettipizza.presentation.details.DetailsDialog
 import com.example.margarettipizza.presentation.details.DetailsDialog.Companion.PIZZA_PASSED_ID_KEY
@@ -21,7 +23,6 @@ import dagger.android.support.DaggerFragment
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject
-import kotlin.system.exitProcess
 
 //fixme cleanup
 class MenuFragment : DaggerFragment(R.layout.fragment_home) {
@@ -112,7 +113,7 @@ class MenuFragment : DaggerFragment(R.layout.fragment_home) {
                     binding.svPizzaFilter.background =
                         ResourcesCompat.getDrawable(resources, R.color.white, null)
                 } else {
-                    exitProcess(0)
+                    //fixme
                 }
             }
         }
