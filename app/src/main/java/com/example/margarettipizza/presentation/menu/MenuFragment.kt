@@ -7,8 +7,6 @@ import androidx.activity.addCallback
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -19,14 +17,19 @@ import com.example.margarettipizza.presentation.details.DetailsDialog
 import com.example.margarettipizza.presentation.details.DetailsDialog.Companion.PIZZA_PASSED_ID_KEY
 import com.example.margarettipizza.utils.hideKeyboard
 import com.example.margarettipizza.views.MarginItemDecoration
+import dagger.android.support.DaggerFragment
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
+import javax.inject.Inject
 import kotlin.system.exitProcess
+
 //fixme cleanup
-class MenuFragment : Fragment(R.layout.fragment_home) {
+class MenuFragment : DaggerFragment(R.layout.fragment_home) {
 
     private val binding by viewBinding(FragmentHomeBinding::bind)
-    private val viewModel by viewModels<MenuViewModel>()
+
+    @Inject
+    lateinit var viewModel: MenuViewModel
     private val disposable = CompositeDisposable()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,6 +43,11 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
         }
 
         with(binding) {
+
+            toolbar.setOnClickListener {
+                viewModel.pizzaList
+            }
+
             //Setting up rv
             rvPizzaList.apply {
                 adapter = pizzaListAdapter
@@ -82,16 +90,16 @@ class MenuFragment : Fragment(R.layout.fragment_home) {
 //                Setting up searchview background if it's closed
                 setOnCloseListener {
                     background = ResourcesCompat.getDrawable(resources, R.color.white, null)
-                    val list = viewModel.pizzaList.doOnSubscribe {
-                        showLoad(true)
-                    }.observeOn(AndroidSchedulers.mainThread()).subscribe(
-                        {
-                            pizzaListAdapter.submitList(it)
-                            showLoad(false)
-                        }, {
-                            showLoad(false)
-                        }, disposable
-                    )
+//                    val list = viewModel.pizzaList.doOnSubscribe {
+//                        showLoad(true)
+//                    }.observeOn(AndroidSchedulers.mainThread()).subscribe(
+//                        {
+//                            pizzaListAdapter.submitList(it)
+//                            showLoad(false)
+//                        }, {
+//                            showLoad(false)
+//                        }, disposable
+//                    )
                     false
                 }
             }

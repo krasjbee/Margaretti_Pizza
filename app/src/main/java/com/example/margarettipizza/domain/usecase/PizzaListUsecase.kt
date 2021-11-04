@@ -2,20 +2,20 @@ package com.example.margarettipizza.domain.usecase
 
 import com.example.margarettipizza.data.remote.dto.PizzaDto
 import com.example.margarettipizza.data.repository.PizzaRepository
-import com.example.margarettipizza.data.repository.PizzaRepositoryImpl
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
+import javax.inject.Inject
 
-class PizzaListUsecase {
-    private val repository: PizzaRepository = PizzaRepositoryImpl()
+class PizzaListUsecase @Inject constructor(private val remoteRepository: PizzaRepository) {
+
 
     fun getAllPizza(): Single<List<PizzaDto>> {
-        return repository.getAll()
+        return this.remoteRepository.getAll()
     }
 
     fun rxGetByName(query: Observable<String>): Observable<PizzaDto> {
         val map = query.flatMap { queryString ->
-            repository.getAll().toObservable().flatMapIterable { it }.filter {
+            this.remoteRepository.getAll().toObservable().flatMapIterable { it }.filter {
                 it.name.contains(queryString)
             }
         }

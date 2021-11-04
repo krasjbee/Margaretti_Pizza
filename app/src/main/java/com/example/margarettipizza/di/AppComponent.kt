@@ -7,7 +7,7 @@ import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
 import javax.inject.Singleton
 
-@Component(modules = [AndroidInjectionModule::class, ActivitiesModule::class])
+@Component(modules = [AndroidInjectionModule::class, ActivitiesModule::class, AppModule::class, FragmentModule::class, RepoModule::class])
 @Singleton
 interface AppComponent : AndroidInjector<Application> {
 
@@ -20,6 +20,6 @@ interface AppComponent : AndroidInjector<Application> {
         fun bindContext(application: Application): Builder
 
         fun build(): AppComponent
-    }
 
+    }
 }

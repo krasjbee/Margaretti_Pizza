@@ -4,8 +4,9 @@ import com.example.margarettipizza.data.remote.NetworkModule
 import com.example.margarettipizza.data.remote.dto.PizzaDto
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
+import javax.inject.Inject
 
-class PizzaRepositoryImpl : PizzaRepository {
+class PizzaRepositoryImpl @Inject constructor() : PizzaRepository {
 
     private val remoteDataSource = NetworkModule.retrofit
 

@@ -1,13 +1,12 @@
 package com.example.margarettipizza.di
 
-import com.example.margarettipizza.MainActivity
+import com.example.margarettipizza.presentation.menu.MenuFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class ActivitiesModule {
-
+abstract class FragmentModule {
     @ContributesAndroidInjector
-    abstract fun mainActivity(): MainActivity
+    abstract fun menuFragment(): MenuFragment
 
 }
