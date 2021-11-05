@@ -5,10 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.example.margarettipizza.data.local.cacheDatabase.PizzaCacheEntity
 import com.example.margarettipizza.data.local.typeconverter.ListTypeConverter
 import com.example.margarettipizza.data.remote.dto.PizzaDto
 
-@Database(entities = [PizzaDto::class], version = 1)
+@Database(entities = [PizzaDto::class, PizzaCacheEntity::class], version = 1)
 @TypeConverters(ListTypeConverter::class)
 abstract class PizzaDatabase : RoomDatabase() {
 
