@@ -10,6 +10,7 @@ class ListTypeConverter {
 
     @TypeConverter
     fun jsonStringToList(string: String): List<String> {
+
         val type = emptyList<String>().javaClass
         return Gson().fromJson(string, type)
     }

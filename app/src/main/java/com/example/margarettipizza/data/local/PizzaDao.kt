@@ -26,4 +26,7 @@ interface PizzaDao {
     @Query("SELECT * FROM pizza_table WHERE name LIKE :query")
     fun getByNameMatch(query: String): Single<List<PizzaDto>>
 
+    @Query("SELECT * FROM pizza_table WHERE id LIKE :id")
+    fun getPizzaById(id: Int): Single<List<PizzaDto>>
+
 }
