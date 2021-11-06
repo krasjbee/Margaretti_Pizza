@@ -1,4 +1,4 @@
-package com.example.margarettipizza.data.repository.local
+package com.example.margarettipizza.data.repository.local.pizzaRepository
 
 import com.example.margarettipizza.data.local.pizzaDatabase.PizzaDao
 import com.example.margarettipizza.data.remote.dto.PizzaDto

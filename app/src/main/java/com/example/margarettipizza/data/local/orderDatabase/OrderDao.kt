@@ -3,6 +3,7 @@ package com.example.margarettipizza.data.local.orderDatabase
 import androidx.room.*
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 
 
 @Dao
@@ -17,6 +18,9 @@ interface OrderDao {
     @Delete
     fun deleteOrderEntity(orderEntity: OrderEntity): Completable
 
+    @Query("DELETE FROM order_table WHERE id LIKE :id")
+    fun deleteEntityById(id: Int): Completable
+
     @Query("DELETE FROM order_table")
     fun deleteOrder(): Completable
 
@@ -25,4 +29,11 @@ interface OrderDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertEntity(entity: OrderEntity): Completable
+
+    @Query("SELECT * FROM order_table WHERE id LIKE :id ")
+    fun getEntityById(id: Int): Single<OrderEntity>
+//
+//    @Transaction
+//    @Query("SELECT * FROM order_table")
+//    fun getOrderWithPizza():Single<List<OrderWithPizza>>
 }
