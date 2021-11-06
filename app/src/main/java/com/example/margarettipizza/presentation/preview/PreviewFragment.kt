@@ -29,26 +29,14 @@ class PreviewFragment() : DaggerFragment(R.layout.fragment_preview) {
         val viewPagerAdapter = ImageGalleryAdapter()
 
 
-
         pizzaStream.observeOn(AndroidSchedulers.mainThread()).subscribe({ pizza ->
-            pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    //sets page counter to string like 1/4
-                    val pageCounter = "${position + 1}/${pizza.imageUrls.size}"
-                    binding.tvPageCounter.text = pageCounter
-                    super.onPageSelected(position)
-                }
-            }
+            setupViewPagerCallback(pizza.imageUrls.size)
+            setupViews(viewPagerAdapter)
             //fixme fix warning
             with(binding) {
                 tvTitle.text = pizza.name
-                tvPageCounter.text = "1/${pizza.imageUrls}"
-                //Setting up viewPager
-                vpPizzaGallery.apply {
-                    adapter = viewPagerAdapter
-                    orientation = ViewPager2.ORIENTATION_HORIZONTAL
-                    registerOnPageChangeCallback(pageChangeCallback!!)
-                }
+                val pageCounterText = "1/${pizza.imageUrls.size}"
+                tvPageCounter.text = pageCounterText
             }
             viewPagerAdapter.setList(pizza.imageUrls)
         }, {})
@@ -58,9 +46,34 @@ class PreviewFragment() : DaggerFragment(R.layout.fragment_preview) {
         super.onViewCreated(view, savedInstanceState)
     }
 
+
     override fun onDestroyView() {
         pageChangeCallback?.let { binding.vpPizzaGallery.unregisterOnPageChangeCallback(it) }
         super.onDestroyView()
+    }
+
+    private fun setupViews(
+        viewPagerAdapter: ImageGalleryAdapter
+    ) {
+        binding.vpPizzaGallery.apply {
+            adapter = viewPagerAdapter
+            orientation = ViewPager2.ORIENTATION_HORIZONTAL
+            registerOnPageChangeCallback(pageChangeCallback!!)
+        }
+        binding.ibBack.setOnClickListener {
+            parentFragmentManager.popBackStackImmediate()
+        }
+    }
+
+    private fun setupViewPagerCallback(listSize: Int) {
+        pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                //sets page counter to string like 1/4
+                val pageCounter = "${position + 1}/${listSize}"
+                binding.tvPageCounter.text = pageCounter
+                super.onPageSelected(position)
+            }
+        }
     }
 
     companion object {
