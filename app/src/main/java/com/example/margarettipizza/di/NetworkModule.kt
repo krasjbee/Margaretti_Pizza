@@ -2,13 +2,16 @@ package com.example.margarettipizza.di
 
 import com.example.margarettipizza.BuildConfig
 import com.example.margarettipizza.data.remote.PizzaRemoteApi
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
+//import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -25,6 +28,8 @@ class NetworkModule {
             }
         }
 
+        val contentType = "application/json".toMediaType()
+
         val client = OkHttpClient().newBuilder()
             .addInterceptor(loggingInterceptor)
             .build()
@@ -32,7 +37,7 @@ class NetworkModule {
         return Retrofit.Builder()
             .client(client)
             .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(Json.asConverterFactory(contentType))
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .build().create(PizzaRemoteApi::class.java)
 

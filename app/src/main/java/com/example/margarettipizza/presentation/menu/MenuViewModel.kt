@@ -2,23 +2,21 @@ package com.example.margarettipizza.presentation.menu
 
 import androidx.lifecycle.ViewModel
 import com.example.margarettipizza.data.remote.dto.PizzaDto
-import com.example.margarettipizza.domain.usecase.PizzaListUsecase
-import io.reactivex.rxjava3.core.Observable
+import com.example.margarettipizza.domain.usecase.PizzaUsecase
+import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 //fixme cleanup
-class MenuViewModel @Inject constructor(private val usecase: PizzaListUsecase) : ViewModel() {
+class MenuViewModel @Inject constructor(private val usecase: PizzaUsecase) : ViewModel() {
 
-    var pizzaList = usecase.getAllPizza()
-    var filtredList: Observable<PizzaDto>? = null
+    val pizzaList get() = usecase.getAllPizza()
 
-    fun filterByName(query: String) {
-        val queryStream = Observable.create<String> {
-            it.onNext(query)
-            //fixme kostil'
-            it.onComplete()
-        }
-        filtredList = usecase.rxGetByName(queryStream)
+    fun getFilteredList(query: String): Single<List<PizzaDto>> {
+        return usecase.getPizzaByName(query)
+    }
 
+    override fun onCleared() {
+        usecase.dispose()
+        super.onCleared()
     }
 }

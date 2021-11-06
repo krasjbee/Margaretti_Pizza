@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.margarettipizza.R
-import com.example.margarettipizza.data.remote.dto.PizzaDto
-import com.example.margarettipizza.data.repository.PizzaRepository
 import com.example.margarettipizza.databinding.FragmentHomeBinding
 import com.example.margarettipizza.presentation.details.DetailsDialog
 import com.example.margarettipizza.presentation.details.DetailsDialog.Companion.PIZZA_PASSED_ID_KEY
@@ -32,102 +30,50 @@ class MenuFragment : DaggerFragment(R.layout.fragment_home) {
     @Inject
     lateinit var viewModel: MenuViewModel
     private val disposable = CompositeDisposable()
+    private lateinit var pizzaListAdapter: PizzaListAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         //Creating rv adapter
-        val pizzaListAdapter = PizzaListAdapter { selectedPizza ->
+        pizzaListAdapter = PizzaListAdapter { selectedPizza ->
             val dets = DetailsDialog()
             val bundle = bundleOf(PIZZA_PASSED_ID_KEY to selectedPizza.id)
             dets.arguments = bundle
             dets.show(parentFragmentManager, null)
         }
+        //Setting up rv
+        setupRecyclerView()
+        //Setting up searchview query handling
+        setupSearchView()
 
-        with(binding) {
-
-            toolbar.setOnClickListener {
-                viewModel.pizzaList
-            }
-
-            //Setting up rv
-            rvPizzaList.apply {
-                adapter = pizzaListAdapter
-                layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-                addItemDecoration(MarginItemDecoration(requireContext(), 25))
-            }
-
-            //Setting up searchview query handling
-            svPizzaFilter.apply {
-                setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                    override fun onQueryTextSubmit(query: String?): Boolean {
-                        val list = mutableListOf<PizzaDto>()
-                        query?.let { query ->
-                            viewModel.filterByName(query)
-                        }
-                        val filteredListStream = viewModel.filtredList?.doOnSubscribe {
-                            showLoad(true)
-                        }?.collectInto(list, { l, e ->
-                            l.add(e)
-                        })?.observeOn(AndroidSchedulers.mainThread())?.subscribe({
-                            pizzaListAdapter.submitList(it)
-                            showLoad(false)
-                        }, { showLoad(false) }, disposable)
-                        hideKeyboard()
-                        return true
-                    }
-
-                    override fun onQueryTextChange(newText: String?): Boolean {
-                        return true
-                    }
-                }
-                )
-                setOnSearchClickListener {
-                    background = ResourcesCompat.getDrawable(
-                        resources,
-                        R.drawable.search_view_background,
-                        null
-                    )
-                }
-//                Setting up searchview background if it's closed
-                setOnCloseListener {
-                    background = ResourcesCompat.getDrawable(resources, R.color.white, null)
-//                    val list = viewModel.pizzaList.doOnSubscribe {
-//                        showLoad(true)
-//                    }.observeOn(AndroidSchedulers.mainThread()).subscribe(
-//                        {
-//                            pizzaListAdapter.submitList(it)
-//                            showLoad(false)
-//                        }, {
-//                            showLoad(false)
-//                        }, disposable
-//                    )
-                    false
-                }
-            }
-            //idk how to do it properly, pls leave your feedback on it
-            //if searchview query is not empty - clear it , else close app
-            // TODO: 27.10.2021 clear search query?
-            requireActivity().onBackPressedDispatcher.addCallback {
-                if (!binding.svPizzaFilter.isIconified) {
-                    binding.svPizzaFilter.onActionViewCollapsed()
-                    binding.svPizzaFilter.background =
-                        ResourcesCompat.getDrawable(resources, R.color.white, null)
-                } else {
-                    //fixme
-                }
-            }
-        }
         //fixme add handle error and loading normally
         val list = viewModel.pizzaList.doOnSubscribe {
+            Log.d("onSubscribe", "onViewCreated: ")
             showLoad(true)
         }.observeOn(AndroidSchedulers.mainThread()).subscribe(
             {
                 pizzaListAdapter.submitList(it)
+                Log.d("qwe", "lsit: $it")
                 showLoad(false)
             }, {
+                Log.d("qwe", "list: error ${it.message} ")
+                it.printStackTrace()
+                Log.d("qwe", "onViewCreated: ${it.stackTraceToString()} ")
                 showLoad(false)
             }, disposable
         )
+
+
+
+        requireActivity().onBackPressedDispatcher.addCallback {
+            if (!binding.svPizzaFilter.isIconified) {
+                binding.svPizzaFilter.onActionViewCollapsed()
+                binding.svPizzaFilter.background =
+                    ResourcesCompat.getDrawable(resources, R.color.white, null)
+            } else {
+                //fixme
+            }
+        }
 
         super.onViewCreated(view, savedInstanceState)
     }
@@ -141,5 +87,68 @@ class MenuFragment : DaggerFragment(R.layout.fragment_home) {
         binding.groupMenuContent.isVisible = !isLoad
         binding.piLoading.isVisible = isLoad
     }
+
+    private fun setupSearchView() {
+        binding.svPizzaFilter.apply {
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    query?.let { query ->
+                        submitFilteredList(query)
+                    }
+                    hideKeyboard()
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    //do nothing
+                    return true
+                }
+            }
+            )
+            setOnSearchClickListener {
+                background = ResourcesCompat.getDrawable(
+                    resources,
+                    R.drawable.search_view_background,
+                    null
+                )
+            }
+//                Setting up searchview background if it's closed
+            setOnCloseListener {
+                background = ResourcesCompat.getDrawable(resources, R.color.white, null)
+                false
+            }
+        }
+    }
+
+    private fun setupRecyclerView() {
+        binding.rvPizzaList.apply {
+            adapter = pizzaListAdapter
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+            addItemDecoration(MarginItemDecoration(requireContext(), 25))
+        }
+    }
+
+    private fun submitFilteredList(query: String) {
+        viewModel.getFilteredList(query)
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe {
+                showLoad(true)
+                Log.d("qwe", "submitFilteredList: do on sub")
+            }
+            .subscribe(
+                { filteredList ->
+                    Log.d("qwe", "submitFilteredList: ")
+                    Log.d("qwe", "submitFilteredList:$filteredList ")
+                    showLoad(false)
+                    pizzaListAdapter.submitList(filteredList)
+                },
+                {
+                    showLoad(false)
+                    Log.d("qwe", "submitFilteredList: error")
+                },
+                disposable
+            )
+    }
+
 
 }

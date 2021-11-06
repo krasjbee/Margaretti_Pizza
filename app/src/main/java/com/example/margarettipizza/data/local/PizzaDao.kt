@@ -12,7 +12,7 @@ interface PizzaDao {
     fun getAllPizza(): Single<List<PizzaDto>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg pizzaList: PizzaDto): Completable
+    fun insertAll(list: List<PizzaDto>): Completable
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(pizzaDto: PizzaDto): Completable
@@ -27,6 +27,6 @@ interface PizzaDao {
     fun getByNameMatch(query: String): Single<List<PizzaDto>>
 
     @Query("SELECT * FROM pizza_table WHERE id LIKE :id")
-    fun getPizzaById(id: Int): Single<List<PizzaDto>>
+    fun getPizzaById(id: Int): Single<PizzaDto>
 
 }

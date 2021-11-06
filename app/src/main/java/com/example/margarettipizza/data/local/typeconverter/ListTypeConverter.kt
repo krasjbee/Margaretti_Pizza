@@ -1,7 +1,10 @@
 package com.example.margarettipizza.data.local.typeconverter
 
+//import com.google.gson.Gson
 import androidx.room.TypeConverter
-import com.google.gson.Gson
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 class ListTypeConverter {
 
@@ -9,9 +12,5 @@ class ListTypeConverter {
     fun listToJsonString(entity: List<String>): String = Gson().toJson(entity)
 
     @TypeConverter
-    fun jsonStringToList(string: String): List<String> {
-
-        val type = emptyList<String>().javaClass
-        return Gson().fromJson(string, type)
-    }
+    fun jsonStringToList(string: String): List<String> = Json.decodeFromString(string)
 }

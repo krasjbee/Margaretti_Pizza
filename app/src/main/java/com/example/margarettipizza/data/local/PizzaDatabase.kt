@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.margarettipizza.data.local.cacheDatabase.PizzaCacheEntity
+import com.example.margarettipizza.data.local.cacheDatabase.PizzaPicDatabase
 import com.example.margarettipizza.data.local.typeconverter.ListTypeConverter
 import com.example.margarettipizza.data.remote.dto.PizzaDto
 
@@ -14,6 +15,8 @@ import com.example.margarettipizza.data.remote.dto.PizzaDto
 abstract class PizzaDatabase : RoomDatabase() {
 
     abstract fun pizzaDao(): PizzaDao
+
+    abstract fun pizzaCacheDao(): PizzaPicDatabase
 
     companion object {
         //took google sunflower as an example
