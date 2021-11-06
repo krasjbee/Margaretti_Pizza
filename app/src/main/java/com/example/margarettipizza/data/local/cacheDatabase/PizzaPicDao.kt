@@ -5,7 +5,7 @@ import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
 @Dao
-interface PizzaPicDatabase {
+interface PizzaPicDao {
     @Query("SELECT * FROM cache_table")
     fun getAllCacheEntities(): Single<List<PizzaCacheEntity>>
 
