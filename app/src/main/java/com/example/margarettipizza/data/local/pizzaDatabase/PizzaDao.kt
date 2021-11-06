@@ -1,4 +1,4 @@
-package com.example.margarettipizza.data.local
+package com.example.margarettipizza.data.local.pizzaDatabase
 
 import androidx.room.*
 import com.example.margarettipizza.data.remote.dto.PizzaDto

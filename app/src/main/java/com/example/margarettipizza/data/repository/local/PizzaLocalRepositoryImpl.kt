@@ -1,6 +1,6 @@
-package com.example.margarettipizza.data.repository
+package com.example.margarettipizza.data.repository.local
 
-import com.example.margarettipizza.data.local.PizzaDao
+import com.example.margarettipizza.data.local.pizzaDatabase.PizzaDao
 import com.example.margarettipizza.data.remote.dto.PizzaDto
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single

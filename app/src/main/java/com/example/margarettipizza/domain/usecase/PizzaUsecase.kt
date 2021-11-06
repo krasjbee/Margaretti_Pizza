@@ -2,8 +2,8 @@ package com.example.margarettipizza.domain.usecase
 
 import android.util.Log
 import com.example.margarettipizza.data.remote.dto.PizzaDto
-import com.example.margarettipizza.data.repository.PizzaLocalRepository
-import com.example.margarettipizza.data.repository.PizzaRepository
+import com.example.margarettipizza.data.repository.local.PizzaLocalRepository
+import com.example.margarettipizza.data.repository.remote.PizzaRepository
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject

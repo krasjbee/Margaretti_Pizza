@@ -31,7 +31,6 @@ class PreviewFragment() : DaggerFragment(R.layout.fragment_preview) {
 
 
         pizzaStream.observeOn(AndroidSchedulers.mainThread()).subscribe({ pizza ->
-
             pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     //sets page counter to string like 1/4
