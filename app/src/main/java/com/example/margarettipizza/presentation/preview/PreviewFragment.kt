@@ -3,20 +3,22 @@ package com.example.margarettipizza.presentation.preview
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.margarettipizza.R
 import com.example.margarettipizza.databinding.FragmentPreviewBinding
+import dagger.android.support.DaggerFragment
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import javax.inject.Inject
 
 
 //fixme set backarrow click
-class PreviewFragment() : Fragment(R.layout.fragment_preview) {
+class PreviewFragment() : DaggerFragment(R.layout.fragment_preview) {
 
     private val binding by viewBinding(FragmentPreviewBinding::bind)
-    private val viewModel by viewModels<PreviewViewModel>()
+
+    @Inject
+    lateinit var viewModel: PreviewViewModel
     private var pageChangeCallback: ViewPager2.OnPageChangeCallback? = null
 
 

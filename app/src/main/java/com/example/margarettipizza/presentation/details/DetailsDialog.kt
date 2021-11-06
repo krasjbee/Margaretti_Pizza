@@ -53,7 +53,7 @@ class DetailsDialog : BottomSheetDialogFragment() {
                 tvPizzaPrice.text =
                     String.format(getString(R.string.ruble_symbol), pizza.price.toInt())
                 //fixme fix click listener
-                llClickable.setOnClickListener {
+                sivPizzaPic.setOnClickListener {
                     parentFragmentManager.commit {
                         replace(
                             R.id.main_container,
