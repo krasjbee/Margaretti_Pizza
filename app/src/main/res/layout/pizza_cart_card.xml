@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="119dp">
+    android:layout_height="119dp"
+    app:cardCornerRadius="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,8 +18,9 @@
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-
             app:layout_constraintTop_toTopOf="parent"
+
+            app:shapeAppearanceOverlay="@style/PizzaPicAppearance.Cart"
             tools:src="@tools:sample/avatars" />
 
         <TextView
@@ -28,8 +30,10 @@
 
             android:layout_marginStart="23dp"
             app:layout_constraintStart_toEndOf="@id/siv_pizza_cart_pic"
-
             app:layout_constraintTop_toTopOf="parent"
+
+            android:textAppearance="@style/PizzaText.Name"
+            android:textSize="20sp"
             tools:text="@tools:sample/lorem" />
 
         <TextView
@@ -41,6 +45,8 @@
             app:layout_constraintStart_toEndOf="@id/siv_pizza_cart_pic"
             app:layout_constraintTop_toBottomOf="@id/tv_pizza_name"
 
+            android:textAppearance="@style/PizzaText.Details.AddtoCart"
+            android:textSize="20sp"
             tools:text="@tools:sample/lorem" />
 
         <ImageButton
@@ -65,9 +71,11 @@
             app:layout_constraintBottom_toBottomOf="@id/ib_decrement"
             app:layout_constraintEnd_toStartOf="@id/ib_increment"
             app:layout_constraintStart_toEndOf="@id/ib_decrement"
-
             app:layout_constraintTop_toTopOf="@id/ib_decrement"
-            tools:text="@tools:sample/lorem" />
+
+            android:textAppearance="@style/PizzaText.Price"
+            android:textSize="18sp"
+            tools:text="3" />
 
         <ImageButton
             android:id="@+id/ib_increment"
