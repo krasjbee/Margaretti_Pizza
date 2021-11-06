@@ -32,16 +32,18 @@
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
 
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="25dp"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
+        android:contentInsetStart="0dp"
+        app:contentInsetStart="0dp"
         app:title="@string/title_text_home"
         app:titleMargin="0dp">
+        <!-- fixme icon-->
 
         <SearchView
             android:id="@+id/sv_pizza_filter"

@@ -10,10 +10,6 @@ interface PizzaRepository {
      */
     fun getAll(): Single<List<PizzaDto>>
 
-    /**
-     *
-     */
-    fun getByName(query: String): Single<List<PizzaDto>>
 
     fun getPizzaById(id: Int): Single<PizzaDto>
 

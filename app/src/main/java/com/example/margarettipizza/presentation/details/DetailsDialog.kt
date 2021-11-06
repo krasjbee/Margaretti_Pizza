@@ -5,19 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.commit
-import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.example.margarettipizza.R
 import com.example.margarettipizza.databinding.DialogDetailsBinding
 import com.example.margarettipizza.presentation.preview.PreviewFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.android.support.AndroidSupportInjection
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import javax.inject.Inject
 
 class DetailsDialog : BottomSheetDialogFragment() {
 
     private val binding by viewBinding(DialogDetailsBinding::bind)
-    private val viewModel by viewModels<DetailsViewModel>()
+
+    //    private val viewModel by viewModels<DetailsViewModel>()
+    @Inject
+    lateinit var viewModel: DetailsViewModel
 
     //fixme inflater and binding
     override fun onCreateView(
@@ -26,16 +30,22 @@ class DetailsDialog : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.dialog_details, container, false)
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        AndroidSupportInjection.inject(this)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val args = arguments ?: throw Exception("No element passed")
         val id = args.getInt(PIZZA_PASSED_ID_KEY)
+
 
         val pizzaStream = viewModel.getPizzaById(id)
         //fixme move to separate methods
         pizzaStream.observeOn(AndroidSchedulers.mainThread()).subscribe({ pizza ->
             with(binding) {
                 Glide.with(this@DetailsDialog)
-                    .load(pizza.imageUrls[0])
+                    .load(pizza.imageUrls.first())
                     .into(sivPizzaPic)
                 tvPizzaName.text = pizza.name
                 tvPizzaDescription.text = pizza.description

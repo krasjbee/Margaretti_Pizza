@@ -1,6 +1,7 @@
 package com.example.margarettipizza.di
 
 import com.example.margarettipizza.MainActivity
+import com.example.margarettipizza.presentation.details.DetailsDialog
 import com.example.margarettipizza.presentation.menu.MenuFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -15,4 +16,6 @@ abstract class PresentationModule {
     @ContributesAndroidInjector
     abstract fun menuFragment(): MenuFragment
 
+    @ContributesAndroidInjector
+    abstract fun detailsFragment(): DetailsDialog
 }

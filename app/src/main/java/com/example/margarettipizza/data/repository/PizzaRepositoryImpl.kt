@@ -13,9 +13,6 @@ class PizzaRepositoryImpl @Inject constructor(private val remoteDataSource: Pizz
         return remoteDataSource.getAllPizza().subscribeOn(Schedulers.io())
     }
 
-    override fun getByName(query: String): Single<List<PizzaDto>> {
-        return remoteDataSource.getAllPizza().subscribeOn(Schedulers.io())
-    }
 
     override fun getPizzaById(id: Int): Single<PizzaDto> {
         return remoteDataSource.getPizzaById(id).subscribeOn(Schedulers.io())
