@@ -9,12 +9,20 @@ import javax.inject.Inject
 
 class OrderUsecase @Inject constructor(private val orderRepository: OrderRepository) {
 
-    fun incrementQuantity(id: Int) {
-
+    fun incrementQuantity(id: Int): Completable {
+        return orderRepository.getOrderEntityById(id).flatMapCompletable { oldEntity ->
+            orderRepository.updateEntity(OrderEntity(oldEntity.id, oldEntity.quantity + 1))
+        }
     }
 
-    fun decrementQuantity(id: Int) {
-
+    fun decrementQuantity(id: Int): Completable {
+        return orderRepository.getOrderEntityById(id).flatMapCompletable { oldEntity ->
+            if (oldEntity.quantity == 1) {
+                orderRepository.deleteEntity(oldEntity)
+            } else {
+                orderRepository.updateEntity(OrderEntity(oldEntity.id, oldEntity.quantity - 1))
+            }
+        }
     }
 
     fun getOrder(): Observable<List<OrderEntity>> {
@@ -29,4 +37,19 @@ class OrderUsecase @Inject constructor(private val orderRepository: OrderReposit
         return orderRepository.getOrderWithPizza()
     }
 
+    fun getPrice(): Observable<Observable<Int>> {
+
+        return orderRepository.getOrderWithPizza().map {
+            it.size
+        }.flatMap<Observable<Int>> { listSize ->
+            orderRepository.getOrderWithPizza().buffer(listSize).flatMapIterable { it }
+                .flatMapIterable { it }.map { orderEntity ->
+                orderEntity.pizzaDto.price.toInt() * orderEntity.orderEntity.quantity
+            }.window(listSize.toLong())
+        }
+    }
+
+    fun insert(entity: OrderEntity): Completable {
+        return orderRepository.addEntity(entity)
+    }
 }

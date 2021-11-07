@@ -25,6 +25,9 @@ interface OrderDao {
     @Query("DELETE FROM order_table")
     fun deleteOrder(): Completable
 
+    @Update
+    fun updateEntity(entity: OrderEntity): Completable
+
     @Query("UPDATE order_table SET quantity =:quantity WHERE id LIKE :id")
     fun setItemQuantity(id: Int, quantity: Int): Completable
 
@@ -34,7 +37,6 @@ interface OrderDao {
     @Query("SELECT * FROM order_table WHERE id LIKE :id ")
     fun getEntityById(id: Int): Single<OrderEntity>
 
-    //
     @Transaction
     @Query("SELECT * FROM 'order_table' as orderTable INNER JOIN 'pizza_table' as pizzaTable where orderTable.id == pizzaTable.id")
     fun getOrderWithPizza(): Observable<List<OrderWithPizza>>

@@ -7,7 +7,11 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.margarettipizza.data.local.orderDatabase.relations.OrderWithPizza
 import com.example.margarettipizza.databinding.PizzaCartCardBinding
 
-class CartAdapter : ListAdapter<OrderWithPizza, CartViewHolder>(diffUtil) {
+class CartAdapter(
+    private val onDecrementClick: (OrderWithPizza) -> Unit,
+    private val onIncrementClick: (OrderWithPizza) -> Unit,
+) :
+    ListAdapter<OrderWithPizza, CartViewHolder>(diffUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = PizzaCartCardBinding.inflate(inflater, parent, false)
@@ -15,7 +19,7 @@ class CartAdapter : ListAdapter<OrderWithPizza, CartViewHolder>(diffUtil) {
     }
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), onDecrementClick, onIncrementClick)
     }
 
     companion object {

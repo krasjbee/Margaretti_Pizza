@@ -25,12 +25,14 @@
 
         <TextView
             android:id="@+id/tv_pizza_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
 
             android:layout_marginStart="23dp"
             app:layout_constraintStart_toEndOf="@id/siv_pizza_cart_pic"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
 
             android:textAppearance="@style/PizzaText.Name"
             android:textSize="20sp"
