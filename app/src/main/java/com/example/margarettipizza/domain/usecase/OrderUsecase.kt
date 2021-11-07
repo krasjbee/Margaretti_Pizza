@@ -39,13 +39,14 @@ class OrderUsecase @Inject constructor(private val orderRepository: OrderReposit
 
     fun getPrice(): Observable<Observable<Int>> {
 
+        //i don't how to do it properly
         return orderRepository.getOrderWithPizza().map {
             it.size
-        }.flatMap<Observable<Int>> { listSize ->
+        }.flatMap { listSize ->
             orderRepository.getOrderWithPizza().buffer(listSize).flatMapIterable { it }
                 .flatMapIterable { it }.map { orderEntity ->
-                orderEntity.pizzaDto.price.toInt() * orderEntity.orderEntity.quantity
-            }.window(listSize.toLong())
+                    orderEntity.pizzaDto.price.toInt() * orderEntity.orderEntity.quantity
+                }.window(listSize.toLong())
         }
     }
 

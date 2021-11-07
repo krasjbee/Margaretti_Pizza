@@ -1,7 +1,6 @@
 package com.example.margarettipizza.presentation.menu
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.SearchView
 import androidx.core.content.res.ResourcesCompat
@@ -44,23 +43,8 @@ class MenuFragment : DaggerFragment(R.layout.fragment_home) {
         setupRecyclerView()
         //Setting up searchview query handling
         setupSearchView()
-
-        //fixme add handle error and loading normally
-        val list = viewModel.pizzaList.doOnSubscribe {
-            Log.d("onSubscribe", "onViewCreated: ")
-            showLoad(true)
-        }.observeOn(AndroidSchedulers.mainThread()).subscribe(
-            {
-                pizzaListAdapter.submitList(it)
-                Log.d("qwe", "lsit: $it")
-                showLoad(false)
-            }, {
-                Log.d("qwe", "list: error ${it.message} ")
-                it.printStackTrace()
-                Log.d("qwe", "onViewCreated: ${it.stackTraceToString()} ")
-                showLoad(false)
-            }, disposable
-        )
+        //shows initial list
+        showUnfilteredList()
 
 //        requireActivity().onBackPressedDispatcher.addCallback {
 //            if (!binding.svPizzaFilter.isIconified) {
@@ -73,6 +57,19 @@ class MenuFragment : DaggerFragment(R.layout.fragment_home) {
 //        }
 
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun showUnfilteredList() {
+        viewModel.pizzaList.doOnSubscribe {
+            showLoad(true)
+        }.observeOn(AndroidSchedulers.mainThread()).subscribe(
+            {
+                pizzaListAdapter.submitList(it)
+                showLoad(false)
+            }, {
+                showLoad(false)
+            }, disposable
+        )
     }
 
     override fun onDestroy() {
@@ -112,6 +109,7 @@ class MenuFragment : DaggerFragment(R.layout.fragment_home) {
 //                Setting up searchview background if it's closed
             setOnCloseListener {
                 background = ResourcesCompat.getDrawable(resources, R.color.white, null)
+                showUnfilteredList()
                 false
             }
         }
@@ -130,18 +128,14 @@ class MenuFragment : DaggerFragment(R.layout.fragment_home) {
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
                 showLoad(true)
-                Log.d("qwe", "submitFilteredList: do on sub")
             }
             .subscribe(
                 { filteredList ->
-                    Log.d("qwe", "submitFilteredList: ")
-                    Log.d("qwe", "submitFilteredList:$filteredList ")
                     showLoad(false)
                     pizzaListAdapter.submitList(filteredList)
                 },
                 {
                     showLoad(false)
-                    Log.d("qwe", "submitFilteredList: error")
                 },
                 disposable
             )
