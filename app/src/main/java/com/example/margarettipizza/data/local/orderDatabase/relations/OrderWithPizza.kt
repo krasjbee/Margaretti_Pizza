@@ -10,7 +10,7 @@ data class OrderWithPizza(
     @Embedded val orderEntity: OrderEntity,
     @Relation(
         parentColumn = "id",
-        entityColumn = "id"
+        entityColumn = "id",
     )
-    val pizzaEntity: PizzaDto
+    val pizzaDto: PizzaDto
 )

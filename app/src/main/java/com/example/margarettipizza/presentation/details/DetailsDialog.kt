@@ -9,6 +9,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.example.margarettipizza.R
 import com.example.margarettipizza.databinding.DialogDetailsBinding
+import com.example.margarettipizza.presentation.cart.CartFragment
 import com.example.margarettipizza.presentation.preview.PreviewFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.android.support.AndroidSupportInjection
@@ -52,6 +53,14 @@ class DetailsDialog : BottomSheetDialogFragment() {
                 //todo move to viewModel
                 tvPizzaPrice.text =
                     String.format(getString(R.string.ruble_symbol), pizza.price.toInt())
+                llClickable.setOnClickListener {
+                    parentFragmentManager.commit {
+                        replace(
+                            R.id.main_container,
+                            CartFragment()
+                        )
+                    }
+                }
                 //fixme fix click listener
                 sivPizzaPic.setOnClickListener {
                     parentFragmentManager.commit {

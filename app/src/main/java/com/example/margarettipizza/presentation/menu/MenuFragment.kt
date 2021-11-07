@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.SearchView
-import androidx.activity.addCallback
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -63,17 +62,15 @@ class MenuFragment : DaggerFragment(R.layout.fragment_home) {
             }, disposable
         )
 
-
-
-        requireActivity().onBackPressedDispatcher.addCallback {
-            if (!binding.svPizzaFilter.isIconified) {
-                binding.svPizzaFilter.onActionViewCollapsed()
-                binding.svPizzaFilter.background =
-                    ResourcesCompat.getDrawable(resources, R.color.white, null)
-            } else {
-                //fixme
-            }
-        }
+//        requireActivity().onBackPressedDispatcher.addCallback {
+//            if (!binding.svPizzaFilter.isIconified) {
+//                binding.svPizzaFilter.onActionViewCollapsed()
+//                binding.svPizzaFilter.background =
+//                    ResourcesCompat.getDrawable(resources, R.color.white, null)
+//            } else {
+//                //fixme
+//            }
+//        }
 
         super.onViewCreated(view, savedInstanceState)
     }

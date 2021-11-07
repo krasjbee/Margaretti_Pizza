@@ -2,6 +2,7 @@ package com.example.margarettipizza.data.repository.local.orderRepository
 
 import com.example.margarettipizza.data.local.orderDatabase.OrderDao
 import com.example.margarettipizza.data.local.orderDatabase.OrderEntity
+import com.example.margarettipizza.data.local.orderDatabase.relations.OrderWithPizza
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -23,10 +24,14 @@ class OrderRepositoryImpl @Inject constructor(private val orderDatabase: OrderDa
     }
 
     override fun deleteEntity(id: Int): Completable {
-        return orderDatabase.deleteEntityById(id)
+        return orderDatabase.deleteEntityById(id).subscribeOn(Schedulers.io())
     }
 
     override fun deleteOrder(): Completable {
-        return orderDatabase.deleteOrder()
+        return orderDatabase.deleteOrder().subscribeOn(Schedulers.io())
+    }
+
+    override fun getOrderWithPizza(): Observable<List<OrderWithPizza>> {
+        return orderDatabase.getOrderWithPizza().subscribeOn(Schedulers.io())
     }
 }

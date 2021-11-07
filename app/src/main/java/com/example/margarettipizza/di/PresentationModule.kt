@@ -1,6 +1,7 @@
 package com.example.margarettipizza.di
 
 import com.example.margarettipizza.MainActivity
+import com.example.margarettipizza.presentation.cart.CartFragment
 import com.example.margarettipizza.presentation.details.DetailsDialog
 import com.example.margarettipizza.presentation.menu.MenuFragment
 import com.example.margarettipizza.presentation.preview.PreviewFragment
@@ -22,4 +23,7 @@ abstract class PresentationModule {
 
     @ContributesAndroidInjector
     abstract fun previewFragment(): PreviewFragment
+
+    @ContributesAndroidInjector
+    abstract fun cartFragment(): CartFragment
 }

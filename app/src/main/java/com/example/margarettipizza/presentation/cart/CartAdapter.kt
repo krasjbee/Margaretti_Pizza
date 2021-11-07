@@ -15,7 +15,7 @@ class CartAdapter : ListAdapter<OrderWithPizza, CartViewHolder>(diffUtil) {
     }
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.bind(getItem(position))
     }
 
     companion object {
@@ -28,7 +28,7 @@ class CartAdapter : ListAdapter<OrderWithPizza, CartViewHolder>(diffUtil) {
             override fun areContentsTheSame(
                 oldItem: OrderWithPizza,
                 newItem: OrderWithPizza
-            ): Boolean = oldItem.pizzaEntity.price == newItem.pizzaEntity.price
+            ): Boolean = oldItem.pizzaDto.price == newItem.pizzaDto.price
 
         }
     }

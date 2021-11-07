@@ -1,6 +1,7 @@
 package com.example.margarettipizza.domain.usecase
 
 import com.example.margarettipizza.data.local.orderDatabase.OrderEntity
+import com.example.margarettipizza.data.local.orderDatabase.relations.OrderWithPizza
 import com.example.margarettipizza.data.repository.local.orderRepository.OrderRepository
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
@@ -22,6 +23,10 @@ class OrderUsecase @Inject constructor(private val orderRepository: OrderReposit
 
     fun deleteOrder(): Completable {
         return orderRepository.deleteOrder()
+    }
+
+    fun getOrderWithPizza(): Observable<List<OrderWithPizza>> {
+        return orderRepository.getOrderWithPizza()
     }
 
 }

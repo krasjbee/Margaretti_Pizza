@@ -36,6 +36,6 @@ interface OrderDao {
 
     //
     @Transaction
-    @Query("SELECT * FROM order_table")
+    @Query("SELECT * FROM 'order_table' as orderTable INNER JOIN 'pizza_table' as pizzaTable where orderTable.id == pizzaTable.id")
     fun getOrderWithPizza(): Observable<List<OrderWithPizza>>
 }
