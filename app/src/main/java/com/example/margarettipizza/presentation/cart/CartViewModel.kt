@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.example.margarettipizza.data.local.orderDatabase.OrderEntity
 import com.example.margarettipizza.data.local.orderDatabase.relations.OrderWithPizza
 import com.example.margarettipizza.domain.usecase.OrderUsecase
+import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import javax.inject.Inject
@@ -25,7 +26,7 @@ class CartViewModel @Inject constructor(private val orderUsecase: OrderUsecase) 
         return orderUsecase.deleteOrder()
     }
 
-    fun getSum(): Observable<Observable<Int>> {
+    fun getNetworth(): @NonNull Observable<Int> {
         return orderUsecase.getPrice()
     }
 

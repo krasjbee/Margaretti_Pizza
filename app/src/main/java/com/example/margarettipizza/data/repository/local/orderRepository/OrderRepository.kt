@@ -24,4 +24,6 @@ interface OrderRepository {
     fun deleteEntity(orderEntity: OrderEntity): Completable
 
     fun addEntity(orderEntity: OrderEntity): Completable
+
+    fun getSingleOrder(): Single<List<OrderWithPizza>>
 }

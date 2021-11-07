@@ -46,7 +46,7 @@
 
             android:ellipsize="end"
             android:maxLines="1"
-            app:layout_constraintEnd_toStartOf="@id/tv_pizza_price"
+            app:layout_constraintEnd_toStartOf="@id/tv_pizza_card_price"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_pizza_name"
 
@@ -56,7 +56,7 @@
             tools:text="@tools:sample/lorem/random" />
 
         <TextView
-            android:id="@+id/tv_pizza_price"
+            android:id="@+id/tv_pizza_card_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="14dp"

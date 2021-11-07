@@ -15,7 +15,7 @@ class PizzaViewHolder(private val binding: PizzaListCardBinding) :
         with(binding) {
             tvPizzaName.text = pizza.name
             tvPizzaDescription.text = pizza.description
-            tvPizzaPrice.text = String.format(
+            tvPizzaCardPrice.text = String.format(
                 itemView.context.getString(R.string.ruble_symbol),
                 pizza.price.toInt()
             )

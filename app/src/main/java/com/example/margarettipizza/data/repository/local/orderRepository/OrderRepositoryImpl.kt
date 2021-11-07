@@ -43,4 +43,8 @@ class OrderRepositoryImpl @Inject constructor(private val orderDatabase: OrderDa
     override fun addEntity(orderEntity: OrderEntity): Completable {
         return orderDatabase.insertEntity(orderEntity).subscribeOn(Schedulers.io())
     }
+
+    override fun getSingleOrder(): Single<List<OrderWithPizza>> {
+        return orderDatabase.getSingleOrderWithPizza().subscribeOn(Schedulers.io())
+    }
 }

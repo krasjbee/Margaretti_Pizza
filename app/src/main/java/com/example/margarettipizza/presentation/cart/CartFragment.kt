@@ -1,8 +1,8 @@
 package com.example.margarettipizza.presentation.cart
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import androidx.core.view.isGone
 import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,18 +35,20 @@ class CartFragment : DaggerFragment(R.layout.fragment_cart) {
                 .subscribe({
                     cartAdapter.submitList(it)
                 }, {
-//                Log.d("cart", "onViewCreated: $it")
-//                Log.d("cart", "onViewCreated:${it.stackTraceToString()} ")
+
                 })
         )
-        viewModel.getSum().subscribe {
-            Log.d("getsum", "onViewCreated: ")
-            it.reduce { t1, t2 -> t1 + t2 }.subscribe {
-                Log.d("getsum", "onViewCreated: ${it} ")
-            }
-        }
+        disposable.add(
+            viewModel.getNetworth().observeOn(AndroidSchedulers.mainThread())
+                .subscribe { setBottomBarPrice(it) })
+
 
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onDestroyView() {
+        disposable.clear()
+        super.onDestroyView()
     }
 
     private fun setupAdapter() {
@@ -61,6 +63,14 @@ class CartFragment : DaggerFragment(R.layout.fragment_cart) {
                     .subscribeOn(AndroidSchedulers.mainThread()).subscribe()
             )
         })
+    }
+
+    private fun setBottomBarPrice(price: Int) {
+        binding.bottmBar.isGone = price == 0
+        binding.tvPizzaCartPrice.text = String.format(
+            requireActivity().getString(R.string.ruble_symbol),
+            price
+        )
     }
 
     private fun setupRecyclerView() {

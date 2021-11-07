@@ -9,6 +9,7 @@ import javax.inject.Inject
 
 class OrderUsecase @Inject constructor(private val orderRepository: OrderRepository) {
 
+
     fun incrementQuantity(id: Int): Completable {
         return orderRepository.getOrderEntityById(id).flatMapCompletable { oldEntity ->
             orderRepository.updateEntity(OrderEntity(oldEntity.id, oldEntity.quantity + 1))
@@ -37,20 +38,24 @@ class OrderUsecase @Inject constructor(private val orderRepository: OrderReposit
         return orderRepository.getOrderWithPizza()
     }
 
-    fun getPrice(): Observable<Observable<Int>> {
-
-        //i don't how to do it properly
-        return orderRepository.getOrderWithPizza().map {
-            it.size
-        }.flatMap { listSize ->
-            orderRepository.getOrderWithPizza().buffer(listSize).flatMapIterable { it }
-                .flatMapIterable { it }.map { orderEntity ->
-                    orderEntity.pizzaDto.price.toInt() * orderEntity.orderEntity.quantity
-                }.window(listSize.toLong())
-        }
+    fun getPrice(): Observable<Int> {
+        return orderRepository.getOrderWithPizza().flatMapIterable<OrderWithPizza> { it }.map {
+            it.orderEntity.quantity * it.pizzaDto.price.toInt()
+        }.scan { t1, t2 -> t1 + t2 }
     }
 
     fun insert(entity: OrderEntity): Completable {
         return orderRepository.addEntity(entity)
     }
+
+//    fun getPriceBySingle(): Single<Int> {
+//        return orderRepository.getSingleOrder().map<Int>{
+//            it.map {
+//                it.orderEntity.quantity * it.pizzaDto.price.toInt()
+//            }.reduce { acc, i ->
+//                acc + i
+//            }
+//        }
+//    }
+
 }

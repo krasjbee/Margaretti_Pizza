@@ -9,11 +9,11 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.example.margarettipizza.R
 import com.example.margarettipizza.databinding.DialogDetailsBinding
-import com.example.margarettipizza.presentation.cart.CartFragment
 import com.example.margarettipizza.presentation.preview.PreviewFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.android.support.AndroidSupportInjection
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject
 
 class DetailsDialog : BottomSheetDialogFragment() {
@@ -23,6 +23,8 @@ class DetailsDialog : BottomSheetDialogFragment() {
     //    private val viewModel by viewModels<DetailsViewModel>()
     @Inject
     lateinit var viewModel: DetailsViewModel
+
+    private val disposable = CompositeDisposable()
 
     //fixme inflater and binding
     override fun onCreateView(
@@ -54,12 +56,8 @@ class DetailsDialog : BottomSheetDialogFragment() {
                 tvPizzaPrice.text =
                     String.format(getString(R.string.ruble_symbol), pizza.price.toInt())
                 llClickable.setOnClickListener {
-                    parentFragmentManager.commit {
-                        replace(
-                            R.id.main_container,
-                            CartFragment()
-                        )
-                    }
+                    dismiss()
+                    disposable.add(viewModel.addToCart(pizza.id).subscribe())
                 }
                 //fixme fix click listener
                 sivPizzaPic.setOnClickListener {
@@ -78,6 +76,11 @@ class DetailsDialog : BottomSheetDialogFragment() {
         }, {})
 
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onDestroyView() {
+        disposable.clear()
+        super.onDestroyView()
     }
 
     companion object {

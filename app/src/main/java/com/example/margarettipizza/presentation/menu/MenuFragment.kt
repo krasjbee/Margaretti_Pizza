@@ -5,12 +5,15 @@ import android.view.View
 import android.widget.SearchView
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.margarettipizza.R
 import com.example.margarettipizza.databinding.FragmentHomeBinding
+import com.example.margarettipizza.presentation.cart.CartFragment
 import com.example.margarettipizza.presentation.details.DetailsDialog
 import com.example.margarettipizza.presentation.details.DetailsDialog.Companion.PIZZA_PASSED_ID_KEY
 import com.example.margarettipizza.utils.hideKeyboard
@@ -45,6 +48,12 @@ class MenuFragment : DaggerFragment(R.layout.fragment_home) {
         setupSearchView()
         //shows initial list
         showUnfilteredList()
+        setupViews()
+
+        disposable.add(
+            viewModel.getOrderNetworth().observeOn(AndroidSchedulers.mainThread())
+                .subscribe { setBottomBarPrice(it) })
+
 
 //        requireActivity().onBackPressedDispatcher.addCallback {
 //            if (!binding.svPizzaFilter.isIconified) {
@@ -56,7 +65,28 @@ class MenuFragment : DaggerFragment(R.layout.fragment_home) {
 //            }
 //        }
 
+
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun setupViews() {
+        binding.llClickable.setOnClickListener {
+            parentFragmentManager.commit {
+                replace(
+                    R.id.main_container,
+                    CartFragment()
+                )
+                addToBackStack(null)
+            }
+        }
+    }
+
+    private fun setBottomBarPrice(price: Int) {
+        binding.bottmBar.isGone = price == 0
+        binding.tvPizzaPrice.text = String.format(
+            requireActivity().getString(R.string.ruble_symbol),
+            price
+        )
     }
 
     private fun showUnfilteredList() {
@@ -72,9 +102,9 @@ class MenuFragment : DaggerFragment(R.layout.fragment_home) {
         )
     }
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
+        super.onDestroyView()
         disposable.clear()
-        super.onDestroy()
     }
 
     private fun showLoad(isLoad: Boolean) {
