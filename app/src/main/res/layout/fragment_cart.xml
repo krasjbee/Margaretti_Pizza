@@ -10,7 +10,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
 
         android:layout_marginStart="25dp"
         android:layout_marginTop="19dp"
@@ -23,12 +23,24 @@
 
         app:layout_constraintTop_toTopOf="parent"
         app:title="@string/title_text_cart"
-        app:titleMargin="0dp" />
+        app:titleMargin="0dp">
+
+        <ImageButton
+            android:id="@+id/ib_clear_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="end"
+            android:background="@color/transparent"
+            android:src="@drawable/ic_recycle_bin" />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_cart"
         android:layout_width="0dp"
         android:layout_height="0dp"
+
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

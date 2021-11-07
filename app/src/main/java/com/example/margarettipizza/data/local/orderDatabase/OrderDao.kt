@@ -1,6 +1,7 @@
 package com.example.margarettipizza.data.local.orderDatabase
 
 import androidx.room.*
+import com.example.margarettipizza.data.local.orderDatabase.relations.OrderWithPizza
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
@@ -32,8 +33,9 @@ interface OrderDao {
 
     @Query("SELECT * FROM order_table WHERE id LIKE :id ")
     fun getEntityById(id: Int): Single<OrderEntity>
-//
-//    @Transaction
-//    @Query("SELECT * FROM order_table")
-//    fun getOrderWithPizza():Single<List<OrderWithPizza>>
+
+    //
+    @Transaction
+    @Query("SELECT * FROM order_table")
+    fun getOrderWithPizza(): Observable<List<OrderWithPizza>>
 }
