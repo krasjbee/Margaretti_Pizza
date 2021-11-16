@@ -16,11 +16,6 @@ class PizzaUsecase @Inject constructor(
     private val listDisposable = CompositeDisposable()
 
     fun getAllPizza(): Single<List<PizzaDto>> {
-//        return remoteRepository.getAll().flatMapCompletable {
-//            localRepository.addToDatabase(it)
-//        }.andThen(SingleSource {
-//            localRepository.getAllPizza()
-//        })
         return remoteRepository.getAll().flatMapCompletable {
             localRepository.addToDatabase(it)
         }.andThen(SingleSource { obs ->

@@ -54,7 +54,7 @@ class MenuFragment : DaggerFragment(R.layout.fragment_home) {
             viewModel.getOrderNetworth().observeOn(AndroidSchedulers.mainThread())
                 .subscribe { setBottomBarPrice(it) })
 
-
+        //fixme
 //        requireActivity().onBackPressedDispatcher.addCallback {
 //            if (!binding.svPizzaFilter.isIconified) {
 //                binding.svPizzaFilter.onActionViewCollapsed()

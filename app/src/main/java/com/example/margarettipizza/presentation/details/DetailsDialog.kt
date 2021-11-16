@@ -20,7 +20,6 @@ class DetailsDialog : BottomSheetDialogFragment() {
 
     private val binding by viewBinding(DialogDetailsBinding::bind)
 
-    //    private val viewModel by viewModels<DetailsViewModel>()
     @Inject
     lateinit var viewModel: DetailsViewModel
 

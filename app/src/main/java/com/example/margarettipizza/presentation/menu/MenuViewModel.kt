@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import com.example.margarettipizza.data.remote.dto.PizzaDto
 import com.example.margarettipizza.domain.usecase.OrderUsecase
 import com.example.margarettipizza.domain.usecase.PizzaUsecase
-import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
@@ -21,13 +20,9 @@ class MenuViewModel @Inject constructor(
         return usecase.getPizzaByName(query)
     }
 
-    fun getOrderNetworth(): @NonNull Observable<Int> {
+    fun getOrderNetworth(): Observable<Int> {
         return orderUsecase.getPrice()
     }
-
-//    fun getPriceBySingle(): Single<Int> {
-//        return orderUsecase.getPriceBySingle()
-//    }
 
     override fun onCleared() {
         usecase.dispose()

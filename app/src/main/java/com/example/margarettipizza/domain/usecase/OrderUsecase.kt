@@ -50,14 +50,4 @@ class OrderUsecase @Inject constructor(private val orderRepository: OrderReposit
         return orderRepository.addEntity(entity)
     }
 
-//    fun getPriceBySingle(): Single<Int> {
-//        return orderRepository.getSingleOrder().map<Int>{
-//            it.map {
-//                it.orderEntity.quantity * it.pizzaDto.price.toInt()
-//            }.reduce { acc, i ->
-//                acc + i
-//            }
-//        }
-//    }
-
 }
