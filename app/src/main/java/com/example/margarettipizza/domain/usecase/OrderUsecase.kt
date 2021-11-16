@@ -39,9 +39,11 @@ class OrderUsecase @Inject constructor(private val orderRepository: OrderReposit
     }
 
     fun getPrice(): Observable<Int> {
-        return orderRepository.getOrderWithPizza().flatMapIterable<OrderWithPizza> { it }.map {
-            it.orderEntity.quantity * it.pizzaDto.price.toInt()
-        }.scan { t1, t2 -> t1 + t2 }
+        return orderRepository.getOrderWithPizza().map {
+            it.sumOf {
+                it.pizzaDto.price.toInt() * it.orderEntity.quantity
+            }
+        }
     }
 
     fun insert(entity: OrderEntity): Completable {
