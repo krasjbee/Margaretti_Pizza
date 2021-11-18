@@ -30,6 +30,20 @@ class CartFragment : DaggerFragment(R.layout.fragment_cart) {
         setupAdapter()
         setupRecyclerView()
         setupViews()
+        subscribeToOrder()
+        subscribeToNetworth()
+
+
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun subscribeToNetworth() {
+        disposable.add(
+            viewModel.getNetworth().observeOn(AndroidSchedulers.mainThread())
+                .subscribe { setBottomBarPrice(it) })
+    }
+
+    private fun subscribeToOrder() {
         disposable.add(
             viewModel.getOrderWithPizza().observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -38,12 +52,6 @@ class CartFragment : DaggerFragment(R.layout.fragment_cart) {
 
                 })
         )
-        disposable.add(
-            viewModel.getNetworth().observeOn(AndroidSchedulers.mainThread())
-                .subscribe { setBottomBarPrice(it) })
-
-
-        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onDestroyView() {
@@ -93,6 +101,9 @@ class CartFragment : DaggerFragment(R.layout.fragment_cart) {
                     MenuFragment()
                 )
             }
+        }
+        binding.llClickable.setOnClickListener {
+
         }
     }
 }

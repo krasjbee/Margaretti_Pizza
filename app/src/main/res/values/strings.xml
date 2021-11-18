@@ -6,4 +6,6 @@
     <string name="title_text_cart">Cart</string>
     <string name="bottom_bar_checkout">Checkout</string>
     <string name="text_place_order">Place order</string>
+    <string name="text_successful_order">Order was successfully sent!</string>
+    <string name="text_successful_order_message">We will call you soon to confirm order details</string>
 </resources>

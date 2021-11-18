@@ -46,6 +46,7 @@ class MenuFragment : DaggerFragment(R.layout.fragment_home) {
 
         //subscribe to pizza list
         subscribeToList()
+        //setting up bottom bar
         setupBottomBar()
         //Setting up rv
         setupRecyclerView()
@@ -53,26 +54,6 @@ class MenuFragment : DaggerFragment(R.layout.fragment_home) {
         setupSearchView()
         //shows initial list
         viewModel.getPizzaList()
-
-
-        //fixme
-//        requireActivity().onBackPressedDispatcher.addCallback {
-//            if (!binding.svPizzaFilter.isIconified) {
-//                binding.svPizzaFilter.onActionViewCollapsed()
-//                binding.svPizzaFilter.background =
-//                    ResourcesCompat.getDrawable(resources, R.color.white, null)
-//            } else {/**/
-//                if (parentFragmentManager.backStackEntryCount>0){
-//                    Log.d("qwe", "onViewCreated: popped ${parentFragmentManager.backStackEntryCount}")
-//                    parentFragmentManager.popBackStackImmediate()
-//                    Log.d("qwe", "onViewCreated: popped ")
-//                } else {
-//                    Log.d("qwe", "onViewCreated: exit ")
-//                    exitProcess(0)
-//                }
-//            }
-//        }
-
 
         super.onViewCreated(view, savedInstanceState)
     }
