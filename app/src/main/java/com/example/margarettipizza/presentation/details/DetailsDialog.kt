@@ -52,8 +52,7 @@ class DetailsDialog : BottomSheetDialogFragment() {
                 tvPizzaName.text = pizza.name
                 tvPizzaDescription.text = pizza.description
                 //todo move to viewModel
-                tvPizzaPrice.text =
-                    String.format(getString(R.string.ruble_symbol), pizza.price.toInt())
+                tvPizzaPrice.text = pizza.price
                 llClickable.setOnClickListener {
                     dismiss()
                     disposable.add(viewModel.addToCart(pizza.id).subscribe())

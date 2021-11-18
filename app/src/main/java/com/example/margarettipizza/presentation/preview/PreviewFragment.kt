@@ -41,10 +41,7 @@ class PreviewFragment() : DaggerFragment(R.layout.fragment_preview) {
                 tvTitle.text = pizza.name
                 val pageCounterText = "1/${pizza.imageUrls.size}"
                 tvPageCounter.text = pageCounterText
-                tvPizzaPrice.text = String.format(
-                    requireContext().getString(R.string.ruble_symbol),
-                    pizza.price.toInt()
-                )
+                tvPizzaPrice.text = pizza.price
                 llClickable.setOnClickListener {
                     disposable.addAll(viewModel.addToCard(pizzaId).subscribe())
                     parentFragmentManager.commit {

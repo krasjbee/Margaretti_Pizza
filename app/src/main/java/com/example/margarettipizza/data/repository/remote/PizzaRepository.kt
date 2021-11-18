@@ -1,6 +1,6 @@
 package com.example.margarettipizza.data.repository.remote
 
-import com.example.margarettipizza.data.remote.dto.PizzaDto
+import com.example.margarettipizza.domain.entities.PizzaEntity
 import io.reactivex.rxjava3.core.Single
 
 interface PizzaRepository {
@@ -8,9 +8,9 @@ interface PizzaRepository {
     /**
      *
      */
-    fun getAll(): Single<List<PizzaDto>>
+    fun getAll(): Single<List<PizzaEntity>>
 
 
-    fun getPizzaById(id: Int): Single<PizzaDto>
+    fun getPizzaById(id: Int): Single<PizzaEntity>
 
 }

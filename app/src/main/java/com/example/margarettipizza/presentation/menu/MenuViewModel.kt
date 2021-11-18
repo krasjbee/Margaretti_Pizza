@@ -1,7 +1,7 @@
 package com.example.margarettipizza.presentation.menu
 
 import androidx.lifecycle.ViewModel
-import com.example.margarettipizza.data.remote.dto.PizzaDto
+import com.example.margarettipizza.domain.entities.PizzaEntity
 import com.example.margarettipizza.domain.usecase.OrderUsecase
 import com.example.margarettipizza.domain.usecase.PizzaUsecase
 import io.reactivex.rxjava3.core.Observable
@@ -15,7 +15,7 @@ class MenuViewModel @Inject constructor(
     private val orderUsecase: OrderUsecase
 ) : ViewModel() {
     private val disposable = CompositeDisposable()
-    val pizzaList: ReplaySubject<List<PizzaDto>> = ReplaySubject.create()
+    val pizzaList: ReplaySubject<List<PizzaEntity>> = ReplaySubject.create()
 
     fun getPizzaList() {
         usecase.getAllPizza().subscribe({
