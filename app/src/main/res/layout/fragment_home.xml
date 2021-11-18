@@ -22,6 +22,8 @@
         android:indeterminate="true"
         android:visibility="gone"
 
+        app:indicatorColor="@color/main_theme_color"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,11 +38,11 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="25dp"
 
+        android:contentInsetStart="0dp"
+        app:contentInsetStart="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentInsetStart="0dp"
-        app:contentInsetStart="0dp"
         app:title="@string/title_text_home"
         app:titleMargin="0dp">
         <!-- fixme icon-->
@@ -55,6 +57,7 @@
             android:imeOptions="actionSearch"
             android:layoutDirection="ltr"
             android:maxWidth="600dp"
+            android:searchIcon="@drawable/ic_looking_glass"
             app:searchHintIcon="@null" />
     </androidx.appcompat.widget.Toolbar>
 
@@ -66,66 +69,88 @@
         android:layout_marginTop="75dp"
         app:layout_constraintBottom_toBottomOf="parent"
 
+        app:layout_constraintBottom_toTopOf="@id/bottm_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottm_bar"
 
         tools:listitem="@layout/pizza_list_card" />
 
-    <com.google.android.material.card.MaterialCardView
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/gr_bottombar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:constraint_referenced_ids="ll_clickable,bottm_bar" />
+
+    <View
         android:id="@+id/bottm_bar"
         android:layout_width="match_parent"
         android:layout_height="95dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/bottom_bar_background"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/ll_clickable"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+    <!--    <com.google.android.material.card.MaterialCardView-->
+    <!--        android:id="@+id/bottm_bar"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="95dp"-->
+    <!--        android:elevation="20dp"-->
+    <!--        app:shapeAppearanceOverlay="@style/BottomBarShape"-->
+    <!--        android:visibility="gone"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"/>-->
 
-            android:layout_marginStart="25dp"
+    <LinearLayout
+        android:id="@+id/ll_clickable"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bottom_button_shape"
+        android:elevation="1dp"
+
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/bottm_bar"
+        app:layout_constraintEnd_toEndOf="@id/bottm_bar"
+        app:layout_constraintStart_toStartOf="@id/bottm_bar"
+        app:layout_constraintTop_toTopOf="@id/bottm_bar">
+
+        <TextView
+            android:id="@+id/tv_checkout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="23dp"
             android:layout_marginTop="19dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="16dp"
 
-            android:background="@drawable/bottom_button_shape"
-            android:orientation="horizontal">
+            android:layout_marginBottom="19dp"
+            android:layout_weight="1"
+            android:text="@string/bottom_bar_checkout"
 
-            <TextView
-                android:id="@+id/tv_checkout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            android:textAppearance="@style/PizzaText.Details.AddtoCart" />
 
-                android:layout_gravity="start|center_vertical"
-                android:layout_marginStart="23dp"
-                android:layout_marginTop="19dp"
+        <TextView
+            android:id="@+id/tv_pizza_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-                android:layout_marginBottom="19dp"
-                android:layout_weight="1"
-                android:text="@string/bottom_bar_checkout"
-                android:textAppearance="@style/PizzaText.Details.AddtoCart" />
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginTop="19dp"
+            android:layout_marginEnd="24dp"
 
-            <TextView
-                android:id="@+id/tv_pizza_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            android:layout_marginBottom="19dp"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:textAppearance="@style/PizzaText.Details.AddtoCart"
+            tools:text="@tools:sample/lorem" />
 
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginTop="19dp"
-                android:layout_marginEnd="24dp"
-
-                android:layout_marginBottom="19dp"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:textAppearance="@style/PizzaText.Details.AddtoCart"
-                tools:text="@tools:sample/lorem" />
-
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

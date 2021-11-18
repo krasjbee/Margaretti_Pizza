@@ -61,7 +61,14 @@ class MenuFragment : DaggerFragment(R.layout.fragment_home) {
 //                binding.svPizzaFilter.background =
 //                    ResourcesCompat.getDrawable(resources, R.color.white, null)
 //            } else {
-//                //fixme
+//                if (parentFragmentManager.backStackEntryCount>0){
+//                    Log.d("qwe", "onViewCreated: popped ${parentFragmentManager.backStackEntryCount}")
+//                    parentFragmentManager.popBackStackImmediate()
+//                    Log.d("qwe", "onViewCreated: popped ")
+//                } else {
+//                    Log.d("qwe", "onViewCreated: exit ")
+//                    exitProcess(0)
+//                }
 //            }
 //        }
 
@@ -82,7 +89,7 @@ class MenuFragment : DaggerFragment(R.layout.fragment_home) {
     }
 
     private fun setBottomBarPrice(price: Int) {
-        binding.bottmBar.isGone = price == 0
+        binding.grBottombar.isGone = price == 0
         binding.tvPizzaPrice.text = String.format(
             requireActivity().getString(R.string.ruble_symbol),
             price

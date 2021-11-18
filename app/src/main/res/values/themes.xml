@@ -49,33 +49,46 @@
     </style>
 
 
+    <style name="BottomBarShape" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">20dp</item>
+        <item name="cornerSizeTopLeft">20dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+
     <style name="PizzaText">
         <item name="fontFamily">@font/lato</item>
-        <item name="color">@color/text_color_black</item>
+        <item name="android:textColor">@color/text_color_black</item>
     </style>
 
     <style name="PizzaText.Name" parent="PizzaText">
         <item name="android:textSize">24sp</item>
         <item name="lineHeight">28sp</item>
         <item name="fontWeight">600</item>
+        <item name="fontFamily">@font/lato_semibold</item>
     </style>
 
     <style name="PizzaText.Description" parent="PizzaText">
         <item name="android:textSize">12sp</item>
         <item name="lineHeight">14.4sp</item>
         <item name="fontWeight">400</item>
+        <item name="fontFamily">@font/lato_regular</item>
     </style>
 
     <style name="PizzaText.Price" parent="PizzaText">
         <item name="android:textSize">22sp</item>
         <item name="lineHeight">26.4sp</item>
         <item name="fontWeight">700</item>
+        <item name="fontFamily">@font/lato_bold</item>
     </style>
 
     <style name="PizzaText.Details.AddtoCart" parent="PizzaText">
         <item name="android:textSize">18sp</item>
         <item name="lineHeight">21.6sp</item>
         <item name="fontWeight">900</item>
+        <item name="fontFamily">@font/lato_black</item>
     </style>
 
 
