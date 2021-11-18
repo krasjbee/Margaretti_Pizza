@@ -18,6 +18,7 @@ import com.example.margarettipizza.presentation.details.DetailsDialog
 import com.example.margarettipizza.presentation.details.DetailsDialog.Companion.PIZZA_PASSED_ID_KEY
 import com.example.margarettipizza.utils.hideKeyboard
 import com.example.margarettipizza.views.MarginItemDecoration
+import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -42,17 +43,17 @@ class MenuFragment : DaggerFragment(R.layout.fragment_home) {
             dets.arguments = bundle
             dets.show(parentFragmentManager, null)
         }
+
+        //subscribe to pizza list
+        subscribeToList()
+        setupBottomBar()
         //Setting up rv
         setupRecyclerView()
         //Setting up searchview query handling
         setupSearchView()
         //shows initial list
-        showUnfilteredList()
-        setupViews()
+        viewModel.getPizzaList()
 
-        disposable.add(
-            viewModel.getOrderNetworth().observeOn(AndroidSchedulers.mainThread())
-                .subscribe { setBottomBarPrice(it) })
 
         //fixme
 //        requireActivity().onBackPressedDispatcher.addCallback {
@@ -60,7 +61,7 @@ class MenuFragment : DaggerFragment(R.layout.fragment_home) {
 //                binding.svPizzaFilter.onActionViewCollapsed()
 //                binding.svPizzaFilter.background =
 //                    ResourcesCompat.getDrawable(resources, R.color.white, null)
-//            } else {
+//            } else {/**/
 //                if (parentFragmentManager.backStackEntryCount>0){
 //                    Log.d("qwe", "onViewCreated: popped ${parentFragmentManager.backStackEntryCount}")
 //                    parentFragmentManager.popBackStackImmediate()
@@ -76,7 +77,25 @@ class MenuFragment : DaggerFragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    private fun setupViews() {
+    private fun subscribeToList() {
+        viewModel.pizzaList.observeOn(AndroidSchedulers.mainThread()).doOnSubscribe {
+            showLoad(true)
+        }.subscribe({ pizzaList ->
+            showLoad(false)
+            pizzaListAdapter.submitList(pizzaList)
+        }, {
+            showLoad(false)
+            Snackbar.make(requireView(), "An error occurred", Snackbar.LENGTH_SHORT)
+//                .setBackgroundTint(resources.getColor(R.color.main_theme_color,null))
+//                .setTextColor(resources.getColor(R.color.text_color_black,null))
+                .show()
+        })
+    }
+
+    private fun setupBottomBar() {
+        disposable.add(
+            viewModel.getOrderNetworth().observeOn(AndroidSchedulers.mainThread())
+                .subscribe { setBottomBarPrice(it) })
         binding.llClickable.setOnClickListener {
             parentFragmentManager.commit {
                 replace(
@@ -96,18 +115,6 @@ class MenuFragment : DaggerFragment(R.layout.fragment_home) {
         )
     }
 
-    private fun showUnfilteredList() {
-        viewModel.pizzaList.doOnSubscribe {
-            showLoad(true)
-        }.observeOn(AndroidSchedulers.mainThread()).subscribe(
-            {
-                pizzaListAdapter.submitList(it)
-                showLoad(false)
-            }, {
-                showLoad(false)
-            }, disposable
-        )
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -124,7 +131,7 @@ class MenuFragment : DaggerFragment(R.layout.fragment_home) {
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     query?.let { query ->
-                        submitFilteredList(query)
+                        viewModel.getFilteredList(query)
                     }
                     hideKeyboard()
                     return true
@@ -146,7 +153,7 @@ class MenuFragment : DaggerFragment(R.layout.fragment_home) {
 //                Setting up searchview background if it's closed
             setOnCloseListener {
                 background = ResourcesCompat.getDrawable(resources, R.color.white, null)
-                showUnfilteredList()
+                viewModel.getPizzaList()
                 false
             }
         }
@@ -159,24 +166,5 @@ class MenuFragment : DaggerFragment(R.layout.fragment_home) {
             addItemDecoration(MarginItemDecoration(requireContext(), 25))
         }
     }
-
-    private fun submitFilteredList(query: String) {
-        viewModel.getFilteredList(query)
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe {
-                showLoad(true)
-            }
-            .subscribe(
-                { filteredList ->
-                    showLoad(false)
-                    pizzaListAdapter.submitList(filteredList)
-                },
-                {
-                    showLoad(false)
-                },
-                disposable
-            )
-    }
-
 
 }
