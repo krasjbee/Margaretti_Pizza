@@ -62,12 +62,12 @@ class CartFragment : DaggerFragment(R.layout.fragment_cart) {
     private fun setupAdapter() {
         cartAdapter = CartAdapter(onDecrementClick = {
             disposable.add(
-                viewModel.decrementQuantity(it.orderEntity.id)
+                viewModel.decrementQuantity(it.orderEntity.pizzaId)
                     .subscribeOn(AndroidSchedulers.mainThread()).subscribe()
             )
         }, onIncrementClick = {
             disposable.add(
-                viewModel.incrementQuantity(it.orderEntity.id)
+                viewModel.incrementQuantity(it.orderEntity.pizzaId)
                     .subscribeOn(AndroidSchedulers.mainThread()).subscribe()
             )
         })

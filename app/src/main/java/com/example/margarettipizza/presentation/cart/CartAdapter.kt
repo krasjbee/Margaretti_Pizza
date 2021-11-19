@@ -4,14 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.example.margarettipizza.data.local.orderDatabase.relations.OrderWithPizza
 import com.example.margarettipizza.databinding.PizzaCartCardBinding
+import com.example.margarettipizza.domain.entities.OrderAndPizzaEntity
 
 class CartAdapter(
-    private val onDecrementClick: (OrderWithPizza) -> Unit,
-    private val onIncrementClick: (OrderWithPizza) -> Unit,
+    private val onDecrementClick: (OrderAndPizzaEntity) -> Unit,
+    private val onIncrementClick: (OrderAndPizzaEntity) -> Unit,
 ) :
-    ListAdapter<OrderWithPizza, CartViewHolder>(diffUtil) {
+    ListAdapter<OrderAndPizzaEntity, CartViewHolder>(diffUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = PizzaCartCardBinding.inflate(inflater, parent, false)
@@ -23,16 +23,16 @@ class CartAdapter(
     }
 
     companion object {
-        private val diffUtil = object : DiffUtil.ItemCallback<OrderWithPizza>() {
+        private val diffUtil = object : DiffUtil.ItemCallback<OrderAndPizzaEntity>() {
             override fun areItemsTheSame(
-                oldItem: OrderWithPizza,
-                newItem: OrderWithPizza
+                oldItem: OrderAndPizzaEntity,
+                newItem: OrderAndPizzaEntity
             ): Boolean = oldItem.orderEntity == newItem.orderEntity
 
             override fun areContentsTheSame(
-                oldItem: OrderWithPizza,
-                newItem: OrderWithPizza
-            ): Boolean = oldItem.pizzaDto.price == newItem.pizzaDto.price
+                oldItem: OrderAndPizzaEntity,
+                newItem: OrderAndPizzaEntity
+            ): Boolean = oldItem.pizzaEntity.price == newItem.pizzaEntity.price
 
         }
     }

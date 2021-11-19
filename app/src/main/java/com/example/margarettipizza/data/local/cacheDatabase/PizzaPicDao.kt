@@ -7,18 +7,18 @@ import io.reactivex.rxjava3.core.Single
 @Dao
 interface PizzaPicDao {
     @Query("SELECT * FROM cache_table")
-    fun getAllCacheEntities(): Single<List<PizzaCacheEntity>>
+    fun getAllCacheEntities(): Single<List<PizzaCacheDto>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(list: PizzaCacheEntity): Completable
+    fun insertAll(list: PizzaCacheDto): Completable
 
     @Delete
-    fun delete(pizzaCacheEntity: PizzaCacheEntity): Completable
+    fun delete(pizzaCacheDto: PizzaCacheDto): Completable
 
     @Query("DELETE FROM cache_table")
     fun deleteALl(): Completable
 
     @Insert
-    fun insert(pizzaCacheEntity: PizzaCacheEntity): Completable
+    fun insert(pizzaCacheDto: PizzaCacheDto): Completable
 
 }

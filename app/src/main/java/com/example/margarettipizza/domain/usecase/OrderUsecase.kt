@@ -1,8 +1,8 @@
 package com.example.margarettipizza.domain.usecase
 
-import com.example.margarettipizza.data.local.orderDatabase.OrderEntity
-import com.example.margarettipizza.data.local.orderDatabase.relations.OrderWithPizza
-import com.example.margarettipizza.data.repository.local.orderRepository.OrderRepository
+import com.example.margarettipizza.domain.entities.OrderAndPizzaEntity
+import com.example.margarettipizza.domain.entities.OrderEntity
+import com.example.margarettipizza.domain.repository.OrderRepository
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import javax.inject.Inject
@@ -12,7 +12,7 @@ class OrderUsecase @Inject constructor(private val orderRepository: OrderReposit
 
     fun incrementQuantity(id: Int): Completable {
         return orderRepository.getOrderEntityById(id).flatMapCompletable { oldEntity ->
-            orderRepository.updateEntity(OrderEntity(oldEntity.id, oldEntity.quantity + 1))
+            orderRepository.updateEntity(OrderEntity(oldEntity.pizzaId, oldEntity.quantity + 1))
         }
     }
 
@@ -21,7 +21,7 @@ class OrderUsecase @Inject constructor(private val orderRepository: OrderReposit
             if (oldEntity.quantity == 1) {
                 orderRepository.deleteEntity(oldEntity)
             } else {
-                orderRepository.updateEntity(OrderEntity(oldEntity.id, oldEntity.quantity - 1))
+                orderRepository.updateEntity(OrderEntity(oldEntity.pizzaId, oldEntity.quantity - 1))
             }
         }
     }
@@ -34,20 +34,20 @@ class OrderUsecase @Inject constructor(private val orderRepository: OrderReposit
         return orderRepository.deleteOrder()
     }
 
-    fun getOrderWithPizza(): Observable<List<OrderWithPizza>> {
+    fun getOrderWithPizza(): Observable<List<OrderAndPizzaEntity>> {
         return orderRepository.getOrderWithPizza()
     }
 
     fun getPrice(): Observable<Int> {
         return orderRepository.getOrderWithPizza().map {
             it.sumOf {
-                it.pizzaDto.price.toInt() * it.orderEntity.quantity
+                it.pizzaEntity.price.dropLast(1).toInt() * it.orderEntity.quantity
             }
         }
     }
 
-    fun insert(entity: OrderEntity): Completable {
-        return orderRepository.addEntity(entity)
+    fun insert(orderEntity: OrderEntity): Completable {
+        return orderRepository.addEntity(orderEntity)
     }
 
 }

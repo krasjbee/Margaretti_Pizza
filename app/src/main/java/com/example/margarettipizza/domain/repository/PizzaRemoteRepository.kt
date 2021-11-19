@@ -1,9 +1,9 @@
-package com.example.margarettipizza.data.repository.remote
+package com.example.margarettipizza.domain.repository
 
 import com.example.margarettipizza.domain.entities.PizzaEntity
 import io.reactivex.rxjava3.core.Single
 
-interface PizzaRepository {
+interface PizzaRemoteRepository {
     // TODO: 19.10.2021 add documentation
     /**
      *

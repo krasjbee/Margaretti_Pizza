@@ -5,6 +5,7 @@ import com.example.margarettipizza.data.remote.dto.convertToListOfPizzaEntity
 import com.example.margarettipizza.data.remote.dto.convertToPizzaDto
 import com.example.margarettipizza.data.remote.dto.convertToPizzaEntity
 import com.example.margarettipizza.domain.entities.PizzaEntity
+import com.example.margarettipizza.domain.repository.PizzaLocalRepository
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers

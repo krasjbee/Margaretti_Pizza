@@ -11,13 +11,13 @@ import io.reactivex.rxjava3.core.Single
 interface OrderDao {
 
     @Query("SELECT * FROM order_table")
-    fun getOrder(): Observable<List<OrderEntity>>
+    fun getOrder(): Observable<List<OrderDto>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertOrder(list: List<OrderEntity>): Completable
+    fun insertOrder(list: List<OrderDto>): Completable
 
     @Delete
-    fun deleteOrderEntity(orderEntity: OrderEntity): Completable
+    fun deleteOrderEntity(orderDto: OrderDto): Completable
 
     @Query("DELETE FROM order_table WHERE id LIKE :id")
     fun deleteEntityById(id: Int): Completable
@@ -26,16 +26,16 @@ interface OrderDao {
     fun deleteOrder(): Completable
 
     @Update
-    fun updateEntity(entity: OrderEntity): Completable
+    fun updateEntity(dto: OrderDto): Completable
 
     @Query("UPDATE order_table SET quantity =:quantity WHERE id LIKE :id")
     fun setItemQuantity(id: Int, quantity: Int): Completable
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertEntity(entity: OrderEntity): Completable
+    fun insertEntity(dto: OrderDto): Completable
 
     @Query("SELECT * FROM order_table WHERE id LIKE :id ")
-    fun getEntityById(id: Int): Single<OrderEntity>
+    fun getEntityById(id: Int): Single<OrderDto>
 
     @Transaction
     @Query("SELECT * FROM 'order_table' as orderTable INNER JOIN 'pizza_table' as pizzaTable where orderTable.id == pizzaTable.id")

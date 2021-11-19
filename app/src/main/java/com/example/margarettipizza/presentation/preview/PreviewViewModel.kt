@@ -1,7 +1,7 @@
 package com.example.margarettipizza.presentation.preview
 
 import androidx.lifecycle.ViewModel
-import com.example.margarettipizza.data.local.orderDatabase.OrderEntity
+import com.example.margarettipizza.domain.entities.OrderEntity
 import com.example.margarettipizza.domain.usecase.OrderUsecase
 import com.example.margarettipizza.domain.usecase.PizzaUsecase
 import io.reactivex.rxjava3.core.Completable

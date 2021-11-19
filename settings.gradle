@@ -8,3 +8,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Margaretti Pizza"
 include ':app'
+include ':domain'
+include ':view'
+include ':data'
