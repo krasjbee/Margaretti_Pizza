@@ -1,4 +1,4 @@
-package com.example.margarettipizza.presentation.end
+package com.example.view.end
 
 import android.os.Bundle
 import android.view.View

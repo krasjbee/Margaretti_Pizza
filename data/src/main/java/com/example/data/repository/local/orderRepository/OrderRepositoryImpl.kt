@@ -1,12 +1,12 @@
-package com.example.margarettipizza.data.repository.local.orderRepository
+package com.example.data.repository.local.orderRepository
 
-import com.example.margarettipizza.data.local.orderDatabase.OrderDao
-import com.example.margarettipizza.data.local.orderDatabase.convertToOrderDto
-import com.example.margarettipizza.data.local.orderDatabase.convertToOrderEntity
-import com.example.margarettipizza.data.local.orderDatabase.relations.convertToOrderAndPizzaEntity
-import com.example.margarettipizza.domain.entities.OrderAndPizzaEntity
-import com.example.margarettipizza.domain.entities.OrderEntity
-import com.example.margarettipizza.domain.repository.OrderRepository
+import com.example.data.local.orderDatabase.OrderDao
+import com.example.data.local.orderDatabase.convertToOrderDto
+import com.example.data.local.orderDatabase.convertToOrderEntity
+import com.example.data.local.orderDatabase.relations.convertToOrderAndPizzaEntity
+import com.example.domain.entities.OrderAndPizzaEntity
+import com.example.domain.entities.OrderEntity
+import com.example.domain.repository.OrderRepository
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single

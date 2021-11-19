@@ -1,10 +1,10 @@
 package com.example.margarettipizza.di
 
-import com.example.margarettipizza.domain.repository.OrderRepository
-import com.example.margarettipizza.domain.repository.PizzaLocalRepository
-import com.example.margarettipizza.domain.repository.PizzaRemoteRepository
-import com.example.margarettipizza.domain.usecase.OrderUsecase
-import com.example.margarettipizza.domain.usecase.PizzaUsecase
+import com.example.domain.repository.OrderRepository
+import com.example.domain.repository.PizzaLocalRepository
+import com.example.domain.repository.PizzaRemoteRepository
+import com.example.domain.usecase.OrderUsecase
+import com.example.domain.usecase.PizzaUsecase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

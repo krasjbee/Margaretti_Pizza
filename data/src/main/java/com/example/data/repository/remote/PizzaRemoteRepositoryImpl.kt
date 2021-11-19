@@ -1,9 +1,9 @@
-package com.example.margarettipizza.data.repository.remote
+package com.example.data.repository.remote
 
-import com.example.margarettipizza.data.remote.PizzaRemoteApi
-import com.example.margarettipizza.data.remote.dto.convertToPizzaEntity
-import com.example.margarettipizza.domain.entities.PizzaEntity
-import com.example.margarettipizza.domain.repository.PizzaRemoteRepository
+import com.example.data.remote.PizzaRemoteApi
+import com.example.data.remote.dto.convertToPizzaEntity
+import com.example.domain.entities.PizzaEntity
+import com.example.domain.repository.PizzaRemoteRepository
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 

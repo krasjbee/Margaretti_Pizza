@@ -1,8 +1,8 @@
-package com.example.margarettipizza.domain.usecase
+package com.example.domain.usecase
 
-import com.example.margarettipizza.domain.entities.OrderAndPizzaEntity
-import com.example.margarettipizza.domain.entities.OrderEntity
-import com.example.margarettipizza.domain.repository.OrderRepository
+import com.example.domain.entities.OrderAndPizzaEntity
+import com.example.domain.entities.OrderEntity
+import com.example.domain.repository.OrderRepository
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 

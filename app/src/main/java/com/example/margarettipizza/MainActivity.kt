@@ -2,9 +2,9 @@ package com.example.margarettipizza
 
 import android.os.Bundle
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.margarettipizza.databinding.ActivityMainBinding
-import com.example.margarettipizza.presentation.menu.MenuFragment
-import com.example.margarettipizza.presentation.preview.PreviewFragment
+import com.example.view.databinding.ActivityMainBinding
+import com.example.view.menu.MenuFragment
+import com.example.view.preview.PreviewFragment
 import dagger.android.support.DaggerAppCompatActivity
 
 class MainActivity : DaggerAppCompatActivity(R.layout.activity_main) {

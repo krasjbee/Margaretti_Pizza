@@ -1,4 +1,4 @@
-package com.example.margarettipizza.data.local.typeconverter
+package com.example.data.local.typeconverter
 
 //import com.google.gson.Gson
 import androidx.room.TypeConverter

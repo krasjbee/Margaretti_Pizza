@@ -1,9 +1,9 @@
-package com.example.margarettipizza.presentation.details
+package com.example.view.details
 
 import androidx.lifecycle.ViewModel
-import com.example.margarettipizza.domain.entities.OrderEntity
-import com.example.margarettipizza.domain.usecase.OrderUsecase
-import com.example.margarettipizza.domain.usecase.PizzaUsecase
+import com.example.domain.entities.OrderEntity
+import com.example.domain.usecase.OrderUsecase
+import com.example.domain.usecase.PizzaUsecase
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject
 

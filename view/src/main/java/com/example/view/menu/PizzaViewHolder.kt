@@ -1,8 +1,8 @@
-package com.example.margarettipizza.presentation.menu
+package com.example.view.menu
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.margarettipizza.domain.entities.PizzaEntity
+import com.example.domain.entities.PizzaEntity
 import com.example.view.databinding.PizzaListCardBinding
 
 class PizzaViewHolder(private val binding: PizzaListCardBinding) :

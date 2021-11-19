@@ -1,10 +1,10 @@
 package com.example.margarettipizza.di
 
 import com.example.margarettipizza.MainActivity
-import com.example.margarettipizza.presentation.cart.CartFragment
-import com.example.margarettipizza.presentation.details.DetailsDialog
-import com.example.margarettipizza.presentation.menu.MenuFragment
-import com.example.margarettipizza.presentation.preview.PreviewFragment
+import com.example.view.cart.CartFragment
+import com.example.view.details.DetailsDialog
+import com.example.view.menu.MenuFragment
+import com.example.view.preview.PreviewFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

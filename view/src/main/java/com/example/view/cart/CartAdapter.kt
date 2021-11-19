@@ -1,10 +1,10 @@
-package com.example.margarettipizza.presentation.cart
+package com.example.view.cart
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.example.margarettipizza.domain.entities.OrderAndPizzaEntity
+import com.example.domain.entities.OrderAndPizzaEntity
 import com.example.view.databinding.PizzaCartCardBinding
 
 class CartAdapter(

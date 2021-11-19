@@ -1,11 +1,11 @@
-package com.example.margarettipizza.presentation.menu
+package com.example.view.menu
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 
-import com.example.margarettipizza.domain.entities.PizzaEntity
+import com.example.domain.entities.PizzaEntity
 import com.example.view.databinding.PizzaListCardBinding
 
 class PizzaListAdapter(private val onClick: (PizzaEntity) -> Unit) :

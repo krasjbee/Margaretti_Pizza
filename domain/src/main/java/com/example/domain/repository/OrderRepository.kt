@@ -1,7 +1,7 @@
-package com.example.margarettipizza.domain.repository
+package com.example.domain.repository
 
-import com.example.margarettipizza.domain.entities.OrderAndPizzaEntity
-import com.example.margarettipizza.domain.entities.OrderEntity
+import com.example.domain.entities.OrderAndPizzaEntity
+import com.example.domain.entities.OrderEntity
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single

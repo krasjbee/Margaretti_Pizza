@@ -1,4 +1,4 @@
-package com.example.margarettipizza.presentation.preview
+package com.example.view.preview
 
 import android.os.Bundle
 import android.view.View
@@ -6,10 +6,10 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
 import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.margarettipizza.domain.entities.PizzaEntity
-import com.example.margarettipizza.presentation.menu.MenuFragment
+import com.example.domain.entities.PizzaEntity
 import com.example.view.R
 import com.example.view.databinding.FragmentPreviewBinding
+import com.example.view.menu.MenuFragment
 import dagger.android.support.DaggerFragment
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable

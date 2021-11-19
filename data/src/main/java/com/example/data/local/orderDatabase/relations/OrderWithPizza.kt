@@ -1,13 +1,13 @@
-package com.example.margarettipizza.data.local.orderDatabase.relations
+package com.example.data.local.orderDatabase.relations
 
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.example.margarettipizza.data.local.orderDatabase.OrderDto
-import com.example.margarettipizza.data.local.orderDatabase.convertToOrderEntity
-import com.example.margarettipizza.data.remote.dto.PizzaDto
-import com.example.margarettipizza.data.remote.dto.convertToPizzaEntity
-import com.example.margarettipizza.domain.entities.OrderAndPizzaEntity
+import com.example.data.local.orderDatabase.OrderDto
+import com.example.data.local.orderDatabase.convertToOrderEntity
+import com.example.data.remote.dto.PizzaDto
+import com.example.data.remote.dto.convertToPizzaEntity
+import com.example.domain.entities.OrderAndPizzaEntity
 
 data class OrderWithPizza(
     @Embedded val orderDto: OrderDto,

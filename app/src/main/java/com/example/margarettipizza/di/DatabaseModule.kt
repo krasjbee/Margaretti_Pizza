@@ -1,9 +1,9 @@
 package com.example.margarettipizza.di
 
 import android.content.Context
-import com.example.margarettipizza.data.local.orderDatabase.OrderDao
-import com.example.margarettipizza.data.local.pizzaDatabase.PizzaDao
-import com.example.margarettipizza.data.local.pizzaDatabase.PizzaDatabase
+import com.example.data.local.orderDatabase.OrderDao
+import com.example.data.local.pizzaDatabase.PizzaDao
+import com.example.data.local.pizzaDatabase.PizzaDatabase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

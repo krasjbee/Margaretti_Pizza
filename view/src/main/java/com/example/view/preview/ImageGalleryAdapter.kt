@@ -1,4 +1,4 @@
-package com.example.margarettipizza.presentation.preview
+package com.example.view.preview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

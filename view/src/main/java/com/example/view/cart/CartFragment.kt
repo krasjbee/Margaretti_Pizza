@@ -1,4 +1,4 @@
-package com.example.margarettipizza.presentation.cart
+package com.example.view.cart
 
 import android.os.Bundle
 import android.view.View
@@ -7,10 +7,10 @@ import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.margarettipizza.presentation.menu.MenuFragment
-import com.example.margarettipizza.views.MarginItemDecoration
 import com.example.view.R
 import com.example.view.databinding.FragmentCartBinding
+import com.example.view.menu.MenuFragment
+import com.example.view.views.MarginItemDecoration
 import dagger.android.support.DaggerFragment
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable

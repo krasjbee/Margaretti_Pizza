@@ -1,4 +1,4 @@
-package com.example.margarettipizza.data.local.cacheDatabase
+package com.example.data.local.cacheDatabase
 
 import androidx.room.*
 import io.reactivex.rxjava3.core.Completable

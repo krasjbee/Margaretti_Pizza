@@ -1,7 +1,7 @@
-package com.example.margarettipizza.data.local.pizzaDatabase
+package com.example.data.local.pizzaDatabase
 
 import androidx.room.*
-import com.example.margarettipizza.data.remote.dto.PizzaDto
+import com.example.data.remote.dto.PizzaDto
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 

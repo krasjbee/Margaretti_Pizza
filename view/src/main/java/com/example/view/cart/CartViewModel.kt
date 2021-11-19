@@ -1,9 +1,9 @@
-package com.example.margarettipizza.presentation.cart
+package com.example.view.cart
 
 import androidx.lifecycle.ViewModel
-import com.example.margarettipizza.domain.entities.OrderAndPizzaEntity
-import com.example.margarettipizza.domain.entities.OrderEntity
-import com.example.margarettipizza.domain.usecase.OrderUsecase
+import com.example.domain.entities.OrderAndPizzaEntity
+import com.example.domain.entities.OrderEntity
+import com.example.domain.usecase.OrderUsecase
 import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable

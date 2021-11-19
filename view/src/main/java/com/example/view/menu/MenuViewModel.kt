@@ -1,9 +1,9 @@
-package com.example.margarettipizza.presentation.menu
+package com.example.view.menu
 
 import androidx.lifecycle.ViewModel
-import com.example.margarettipizza.domain.entities.PizzaEntity
-import com.example.margarettipizza.domain.usecase.OrderUsecase
-import com.example.margarettipizza.domain.usecase.PizzaUsecase
+import com.example.domain.entities.PizzaEntity
+import com.example.domain.usecase.OrderUsecase
+import com.example.domain.usecase.PizzaUsecase
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.subjects.ReplaySubject

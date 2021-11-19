@@ -1,4 +1,4 @@
-package com.example.margarettipizza.utils
+package com.example.view.utils
 
 import android.content.Context
 import android.view.inputmethod.InputMethodManager

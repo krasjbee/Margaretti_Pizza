@@ -1,4 +1,4 @@
-package com.example.margarettipizza.views
+package com.example.view.views
 
 import android.content.Context
 import android.graphics.Rect

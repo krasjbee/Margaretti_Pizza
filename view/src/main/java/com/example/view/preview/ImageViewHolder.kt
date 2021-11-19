@@ -1,4 +1,4 @@
-package com.example.margarettipizza.presentation.preview
+package com.example.view.preview
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide

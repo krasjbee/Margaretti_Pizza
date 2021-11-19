@@ -40,6 +40,15 @@
         <entry key="..\:/iLinkPizza/app/src/main/res/menu/temp.xml" value="0.35520833333333335" />
         <entry key="..\:/iLinkPizza/app/src/main/res/menu/top_app_bar.xml" value="0.35520833333333335" />
         <entry key="..\:/iLinkPizza/view/src/main/res/drawable/ic_plus.xml" value="0.321" />
+        <entry key="..\:/iLinkPizza/view/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/iLinkPizza/view/src/main/res/layout/dialog_details.xml" value="0.1983695652173913" />
+        <entry key="..\:/iLinkPizza/view/src/main/res/layout/fragment_cart.xml" value="0.3411458333333333" />
+        <entry key="..\:/iLinkPizza/view/src/main/res/layout/fragment_end.xml" value="0.3411458333333333" />
+        <entry key="..\:/iLinkPizza/view/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/iLinkPizza/view/src/main/res/layout/fragment_preview.xml" value="0.3411458333333333" />
+        <entry key="..\:/iLinkPizza/view/src/main/res/layout/pizza_cart_card.xml" value="0.3411458333333333" />
+        <entry key="..\:/iLinkPizza/view/src/main/res/layout/pizza_list_card.xml" value="0.3411458333333333" />
+        <entry key="..\:/iLinkPizza/view/src/main/res/layout/preview_image_view_holder.xml" value="0.3411458333333333" />
       </map>
     </option>
   </component>

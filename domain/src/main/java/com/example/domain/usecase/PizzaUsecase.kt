@@ -1,8 +1,8 @@
-package com.example.margarettipizza.domain.usecase
+package com.example.domain.usecase
 
-import com.example.margarettipizza.domain.entities.PizzaEntity
-import com.example.margarettipizza.domain.repository.PizzaLocalRepository
-import com.example.margarettipizza.domain.repository.PizzaRemoteRepository
+import com.example.domain.entities.PizzaEntity
+import com.example.domain.repository.PizzaLocalRepository
+import com.example.domain.repository.PizzaRemoteRepository
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.core.SingleSource
 import io.reactivex.rxjava3.disposables.CompositeDisposable

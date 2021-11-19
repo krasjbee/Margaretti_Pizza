@@ -1,7 +1,7 @@
-package com.example.margarettipizza.data.remote
+package com.example.data.remote
 
 //import com.example.margarettipizza.domain.entities.Order
-import com.example.margarettipizza.data.remote.dto.PizzaDto
+import com.example.data.remote.dto.PizzaDto
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path

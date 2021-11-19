@@ -1,4 +1,4 @@
-package com.example.margarettipizza.presentation.menu
+package com.example.view.menu
 
 import android.os.Bundle
 import android.view.View
@@ -11,13 +11,13 @@ import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.margarettipizza.presentation.cart.CartFragment
-import com.example.margarettipizza.presentation.details.DetailsDialog
-import com.example.margarettipizza.presentation.details.DetailsDialog.Companion.PIZZA_PASSED_ID_KEY
-import com.example.margarettipizza.utils.hideKeyboard
-import com.example.margarettipizza.views.MarginItemDecoration
 import com.example.view.R
+import com.example.view.cart.CartFragment
 import com.example.view.databinding.FragmentHomeBinding
+import com.example.view.details.DetailsDialog
+import com.example.view.details.DetailsDialog.Companion.PIZZA_PASSED_ID_KEY
+import com.example.view.utils.hideKeyboard
+import com.example.view.views.MarginItemDecoration
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

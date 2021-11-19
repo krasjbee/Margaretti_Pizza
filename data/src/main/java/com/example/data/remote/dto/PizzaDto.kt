@@ -1,8 +1,8 @@
-package com.example.margarettipizza.data.remote.dto
+package com.example.data.remote.dto
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.margarettipizza.domain.entities.PizzaEntity
+import com.example.domain.entities.PizzaEntity
 import kotlinx.serialization.Serializable
 import kotlin.math.roundToInt
 

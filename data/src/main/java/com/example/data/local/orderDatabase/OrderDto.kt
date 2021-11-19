@@ -1,8 +1,8 @@
-package com.example.margarettipizza.data.local.orderDatabase
+package com.example.data.local.orderDatabase
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.margarettipizza.domain.entities.OrderEntity
+import com.example.domain.entities.OrderEntity
 
 @Entity(tableName = "order_table")
 data class OrderDto(

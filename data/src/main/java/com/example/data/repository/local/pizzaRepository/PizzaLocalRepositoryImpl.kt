@@ -1,11 +1,11 @@
-package com.example.margarettipizza.data.repository.local.pizzaRepository
+package com.example.data.repository.local.pizzaRepository
 
-import com.example.margarettipizza.data.local.pizzaDatabase.PizzaDao
-import com.example.margarettipizza.data.remote.dto.convertToListOfPizzaEntity
-import com.example.margarettipizza.data.remote.dto.convertToPizzaDto
-import com.example.margarettipizza.data.remote.dto.convertToPizzaEntity
-import com.example.margarettipizza.domain.entities.PizzaEntity
-import com.example.margarettipizza.domain.repository.PizzaLocalRepository
+import com.example.data.local.pizzaDatabase.PizzaDao
+import com.example.data.remote.dto.convertToListOfPizzaEntity
+import com.example.data.remote.dto.convertToPizzaDto
+import com.example.data.remote.dto.convertToPizzaEntity
+import com.example.domain.entities.PizzaEntity
+import com.example.domain.repository.PizzaLocalRepository
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers

@@ -1,8 +1,8 @@
-package com.example.margarettipizza.presentation.cart
+package com.example.view.cart
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.margarettipizza.domain.entities.OrderAndPizzaEntity
+import com.example.domain.entities.OrderAndPizzaEntity
 import com.example.view.databinding.PizzaCartCardBinding
 
 class CartViewHolder(private val binding: PizzaCartCardBinding) :

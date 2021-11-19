@@ -1,7 +1,7 @@
-package com.example.margarettipizza.data.local.orderDatabase
+package com.example.data.local.orderDatabase
 
 import androidx.room.*
-import com.example.margarettipizza.data.local.orderDatabase.relations.OrderWithPizza
+import com.example.data.local.orderDatabase.relations.OrderWithPizza
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single

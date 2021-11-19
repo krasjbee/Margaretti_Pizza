@@ -1,4 +1,4 @@
-package com.example.margarettipizza.domain.entities
+package com.example.domain.entities
 
 data class PizzaEntity(
     val description: String,
