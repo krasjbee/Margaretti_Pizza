@@ -6,6 +6,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
 import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.example.margarettipizza.domain.entities.PizzaEntity
 import com.example.margarettipizza.presentation.menu.MenuFragment
 import com.example.view.R
 import com.example.view.databinding.FragmentPreviewBinding
@@ -35,18 +36,12 @@ class PreviewFragment() : DaggerFragment(R.layout.fragment_preview) {
 
         pizzaStream.observeOn(AndroidSchedulers.mainThread()).subscribe({ pizza ->
             setupViewPagerCallback(pizza.imageUrls.size)
-            setupViews(viewPagerAdapter)
-            //fixme fix warning
-            with(binding) {
-                tvTitle.text = pizza.name
-                val pageCounterText = "1/${pizza.imageUrls.size}"
-                tvPageCounter.text = pageCounterText
-                tvPizzaPrice.text = pizza.price
-                llClickable.setOnClickListener {
-                    disposable.addAll(viewModel.addToCard(pizzaId).subscribe())
-                    parentFragmentManager.commit {
-                        replace(R.id.main_container, MenuFragment::class.java, null, null)
-                    }
+            setupViewPager(viewPagerAdapter)
+            setupViews(pizza)
+            binding.llClickable.setOnClickListener {
+                viewModel.addToCart(id)
+                parentFragmentManager.commit {
+                    replace(R.id.main_container, MenuFragment::class.java, null, null)
                 }
             }
             viewPagerAdapter.setList(pizza.imageUrls)
@@ -57,6 +52,13 @@ class PreviewFragment() : DaggerFragment(R.layout.fragment_preview) {
         super.onViewCreated(view, savedInstanceState)
     }
 
+    private fun setupViews(pizza: PizzaEntity) {
+        binding.tvTitle.text = pizza.name
+        val pageCounterText = "1/${pizza.imageUrls.size}"
+        binding.tvPageCounter.text = pageCounterText
+        binding.tvPizzaPrice.text = pizza.price
+    }
+
 
     override fun onDestroyView() {
         disposable.clear()
@@ -64,7 +66,7 @@ class PreviewFragment() : DaggerFragment(R.layout.fragment_preview) {
         super.onDestroyView()
     }
 
-    private fun setupViews(
+    private fun setupViewPager(
         viewPagerAdapter: ImageGalleryAdapter
     ) {
         binding.vpPizzaGallery.apply {

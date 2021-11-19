@@ -29,6 +29,15 @@ class MainActivity : DaggerAppCompatActivity(R.layout.activity_main) {
                         resources.getColor(R.color.background_color, null)
                 }
             }
+
+            supportFragmentManager.addFragmentOnAttachListener { fragmentManager, fragment ->
+                when (fragment) {
+                    is PreviewFragment -> window.statusBarColor =
+                        resources.getColor(R.color.black, null)
+                    else -> window.statusBarColor =
+                        resources.getColor(R.color.background_color, null)
+                }
+            }
         }
     }
 }
