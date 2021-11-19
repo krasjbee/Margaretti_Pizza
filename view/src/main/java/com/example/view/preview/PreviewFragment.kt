@@ -39,7 +39,7 @@ class PreviewFragment() : DaggerFragment(R.layout.fragment_preview) {
             setupViewPager(viewPagerAdapter)
             setupViews(pizza)
             binding.llClickable.setOnClickListener {
-                viewModel.addToCart(id)
+                viewModel.addToCart(pizzaId)
                 parentFragmentManager.commit {
                     replace(R.id.main_container, MenuFragment::class.java, null, null)
                 }

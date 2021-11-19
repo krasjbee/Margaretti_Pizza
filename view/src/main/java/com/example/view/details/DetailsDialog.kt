@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.commit
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
+import com.example.margarettipizza.domain.entities.PizzaEntity
 import com.example.margarettipizza.presentation.preview.PreviewFragment
 import com.example.view.R
 import com.example.view.databinding.DialogDetailsBinding
@@ -45,35 +46,44 @@ class DetailsDialog : BottomSheetDialogFragment() {
         val pizzaStream = viewModel.getPizzaById(id)
         //fixme move to separate methods
         pizzaStream.observeOn(AndroidSchedulers.mainThread()).subscribe({ pizza ->
-            with(binding) {
-                Glide.with(this@DetailsDialog)
-                    .load(pizza.imageUrls.first())
-                    .into(sivPizzaPic)
-                tvPizzaName.text = pizza.name
-                tvPizzaDescription.text = pizza.description
-                //todo move to viewModel
-                tvPizzaPrice.text = pizza.price
-                llClickable.setOnClickListener {
-                    dismiss()
-                    disposable.add(viewModel.addToCart(pizza.id).subscribe())
-                }
-                //fixme fix click listener
-                sivPizzaPic.setOnClickListener {
-                    parentFragmentManager.commit {
-                        replace(
-                            R.id.main_container,
-                            PreviewFragment.newInstance(pizza.id)
-                        )
-                        addToBackStack(null)
-                    }
-                    //hide this dialog after navigate to other screen
-                    dismiss()
-                }
-            }
 
-        }, {})
+            setupViews(pizza)
+            setupAddToCartButtonListener(pizza.id)
+            setupOnPictureClickListener(pizza)
+
+        }, {}, disposable)
 
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun setupAddToCartButtonListener(id: Int) {
+        binding.llClickable.setOnClickListener {
+            dismiss()
+            viewModel.addToCart(id)
+        }
+    }
+
+    private fun setupViews(pizza: PizzaEntity) {
+        Glide.with(this@DetailsDialog)
+            .load(pizza.imageUrls.first())
+            .into(binding.sivPizzaPic)
+        binding.tvPizzaName.text = pizza.name
+        binding.tvPizzaDescription.text = pizza.description
+        binding.tvPizzaPrice.text = pizza.price
+    }
+
+    private fun setupOnPictureClickListener(pizza: PizzaEntity) {
+        binding.sivPizzaPic.setOnClickListener {
+            parentFragmentManager.commit {
+                replace(
+                    R.id.main_container,
+                    PreviewFragment.newInstance(pizza.id)
+                )
+                addToBackStack(null)
+            }
+            //hide this dialog after navigate to other screen
+            dismiss()
+        }
     }
 
     override fun onDestroyView() {
