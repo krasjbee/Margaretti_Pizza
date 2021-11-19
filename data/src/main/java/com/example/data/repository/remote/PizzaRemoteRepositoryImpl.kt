@@ -6,9 +6,9 @@ import com.example.margarettipizza.domain.entities.PizzaEntity
 import com.example.margarettipizza.domain.repository.PizzaRemoteRepository
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
-import javax.inject.Inject
 
-class PizzaRemoteRepositoryImpl @Inject constructor(private val remoteDataSource: PizzaRemoteApi) :
+
+class PizzaRemoteRepositoryImpl constructor(private val remoteDataSource: PizzaRemoteApi) :
     PizzaRemoteRepository {
 
     override fun getAll(): Single<List<PizzaEntity>> {

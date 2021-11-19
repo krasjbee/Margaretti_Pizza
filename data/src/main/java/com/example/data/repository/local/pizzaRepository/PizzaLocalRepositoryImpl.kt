@@ -9,9 +9,9 @@ import com.example.margarettipizza.domain.repository.PizzaLocalRepository
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
-import javax.inject.Inject
 
-class PizzaLocalRepositoryImpl @Inject constructor(private val pizzaDao: PizzaDao) :
+
+class PizzaLocalRepositoryImpl constructor(private val pizzaDao: PizzaDao) :
     PizzaLocalRepository {
 
     override fun addToDatabase(pizzaList: List<PizzaEntity>): Completable {

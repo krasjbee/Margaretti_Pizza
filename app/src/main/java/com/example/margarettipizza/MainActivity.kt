@@ -30,6 +30,5 @@ class MainActivity : DaggerAppCompatActivity(R.layout.activity_main) {
                 }
             }
         }
-
     }
 }

@@ -4,8 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.example.margarettipizza.databinding.PizzaListCardBinding
+
 import com.example.margarettipizza.domain.entities.PizzaEntity
+import com.example.view.databinding.PizzaListCardBinding
 
 class PizzaListAdapter(private val onClick: (PizzaEntity) -> Unit) :
     ListAdapter<PizzaEntity, PizzaViewHolder>(diffUtilCallback) {

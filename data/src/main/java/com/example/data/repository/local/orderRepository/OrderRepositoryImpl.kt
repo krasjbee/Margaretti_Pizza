@@ -11,9 +11,9 @@ import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
-import javax.inject.Inject
 
-class OrderRepositoryImpl @Inject constructor(private val orderDatabase: OrderDao) :
+
+class OrderRepositoryImpl constructor(private val orderDatabase: OrderDao) :
     OrderRepository {
 
     override fun getOrder(): Observable<List<OrderEntity>> {

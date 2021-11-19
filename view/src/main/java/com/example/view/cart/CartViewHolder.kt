@@ -2,8 +2,8 @@ package com.example.margarettipizza.presentation.cart
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.margarettipizza.databinding.PizzaCartCardBinding
 import com.example.margarettipizza.domain.entities.OrderAndPizzaEntity
+import com.example.view.databinding.PizzaCartCardBinding
 
 class CartViewHolder(private val binding: PizzaCartCardBinding) :
     RecyclerView.ViewHolder(binding.root) {

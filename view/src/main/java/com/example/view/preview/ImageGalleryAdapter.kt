@@ -3,7 +3,7 @@ package com.example.margarettipizza.presentation.preview
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.margarettipizza.databinding.PreviewImageViewHolderBinding
+import com.example.view.databinding.PreviewImageViewHolderBinding
 
 class ImageGalleryAdapter : RecyclerView.Adapter<ImageViewHolder>() {
 

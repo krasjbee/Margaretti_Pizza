@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.margarettipizza.R
-import com.example.margarettipizza.databinding.FragmentEndBinding
+import com.example.view.R
+import com.example.view.databinding.FragmentEndBinding
 
 class EndFragment : Fragment(R.layout.fragment_end) {
 

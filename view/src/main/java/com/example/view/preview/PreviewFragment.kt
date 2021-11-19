@@ -6,8 +6,9 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
 import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.margarettipizza.R
-import com.example.margarettipizza.databinding.FragmentPreviewBinding
+import com.example.margarettipizza.presentation.menu.MenuFragment
+import com.example.view.R
+import com.example.view.databinding.FragmentPreviewBinding
 import dagger.android.support.DaggerFragment
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable

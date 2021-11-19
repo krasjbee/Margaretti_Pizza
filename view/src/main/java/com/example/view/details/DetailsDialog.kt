@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.commit
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
-import com.example.margarettipizza.R
-import com.example.margarettipizza.databinding.DialogDetailsBinding
+import com.example.margarettipizza.presentation.preview.PreviewFragment
+import com.example.view.R
+import com.example.view.databinding.DialogDetailsBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.android.support.AndroidSupportInjection
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
