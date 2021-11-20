@@ -9,6 +9,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.domain.entities.PizzaEntity
 import com.example.view.R
 import com.example.view.databinding.FragmentPreviewBinding
+import com.example.view.details.DetailsDialog
 import com.example.view.menu.MenuFragment
 import dagger.android.support.DaggerFragment
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -36,7 +37,7 @@ class PreviewFragment() : DaggerFragment(R.layout.fragment_preview) {
 
         pizzaStream.observeOn(AndroidSchedulers.mainThread()).subscribe({ pizza ->
             setupViewPagerCallback(pizza.imageUrls.size)
-            setupViewPager(viewPagerAdapter)
+            setupViewPager(viewPagerAdapter, pizzaId)
             setupViews(pizza)
             binding.llClickable.setOnClickListener {
                 viewModel.addToCart(pizzaId)
@@ -67,7 +68,7 @@ class PreviewFragment() : DaggerFragment(R.layout.fragment_preview) {
     }
 
     private fun setupViewPager(
-        viewPagerAdapter: ImageGalleryAdapter
+        viewPagerAdapter: ImageGalleryAdapter, pizzaId: Int
     ) {
         binding.vpPizzaGallery.apply {
             adapter = viewPagerAdapter
@@ -75,7 +76,12 @@ class PreviewFragment() : DaggerFragment(R.layout.fragment_preview) {
             registerOnPageChangeCallback(pageChangeCallback!!)
         }
         binding.ibBack.setOnClickListener {
+            val dets = DetailsDialog()
+            val bundle = bundleOf(DetailsDialog.PIZZA_PASSED_ID_KEY to pizzaId)
+            dets.arguments = bundle
+            dets.show(parentFragmentManager, null)
             parentFragmentManager.popBackStackImmediate()
+
         }
     }
 

@@ -26,10 +26,6 @@ class OrderUsecase constructor(private val orderRepository: OrderRepository) {
         }
     }
 
-    fun getOrder(): Observable<List<OrderEntity>> {
-        return orderRepository.getOrder()
-    }
-
     fun deleteOrder(): Completable {
         return orderRepository.deleteOrder()
     }

@@ -2,7 +2,6 @@ package com.example.view.cart
 
 import androidx.lifecycle.ViewModel
 import com.example.domain.entities.OrderAndPizzaEntity
-import com.example.domain.entities.OrderEntity
 import com.example.domain.usecase.OrderUsecase
 import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Completable
@@ -30,7 +29,4 @@ class CartViewModel @Inject constructor(private val orderUsecase: OrderUsecase) 
         return orderUsecase.getPrice()
     }
 
-    fun insert(orderDto: OrderEntity): Completable {
-        return orderUsecase.insert(orderDto)
-    }
 }

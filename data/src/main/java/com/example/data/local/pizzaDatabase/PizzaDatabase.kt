@@ -35,7 +35,7 @@ abstract class PizzaDatabase : RoomDatabase() {
             }
         }
 
-        const val DATABASE_NAME = "pizza_db"
+        private const val DATABASE_NAME = "pizza_db"
 
     }
 }
