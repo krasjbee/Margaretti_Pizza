@@ -14,8 +14,10 @@
         android:src="@drawable/ic_pizza_splash_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_successful_order"
 
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/tv_successful_order"
@@ -25,8 +27,14 @@
         android:text="@string/text_successful_order"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/lato_bold"
+        android:textColor="@color/text_color_black"
 
-        app:layout_constraintTop_toBottomOf="@id/iv_pizza_logo" />
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_successful_order_message"
+        app:layout_constraintTop_toBottomOf="@id/iv_pizza_logo"
+
+        />
 
     <TextView
         android:id="@+id/tv_successful_order_message"
@@ -36,7 +44,43 @@
         android:text="@string/text_successful_order_message"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/lato_regular"
+        android:maxLines="2"
 
+        android:textColor="@color/text_color_black"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/ll_clickable"
         app:layout_constraintTop_toBottomOf="@id/tv_successful_order" />
+
+    <LinearLayout
+        android:id="@+id/ll_clickable"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="26dp"
+
+        android:background="@drawable/bottom_button_white"
+        android:orientation="horizontal"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tv_pizza_cart_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="center"
+
+            android:text="@string/text_back_to_menu"
+            android:textAppearance="@style/PizzaText.Details.AddtoCart" />
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

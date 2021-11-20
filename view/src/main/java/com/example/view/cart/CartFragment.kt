@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.view.R
 import com.example.view.databinding.FragmentCartBinding
+import com.example.view.end.EndFragment
 import com.example.view.menu.MenuFragment
 import com.example.view.views.MarginItemDecoration
 import dagger.android.support.DaggerFragment
@@ -105,7 +106,14 @@ class CartFragment : DaggerFragment(R.layout.fragment_cart) {
             }
         }
         binding.llClickable.setOnClickListener {
-
+            parentFragmentManager.commit {
+                replace(
+                    R.id.main_container,
+                    EndFragment::class.java,
+                    null, null
+                )
+                addToBackStack(null)
+            }
         }
     }
 }
