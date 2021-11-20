@@ -3,6 +3,7 @@ package com.example.view.cart
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -48,6 +49,7 @@ class CartFragment : DaggerFragment(R.layout.fragment_cart) {
             viewModel.getOrderWithPizza().observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     cartAdapter.submitList(it)
+                    binding.tvEmptyOrder.isVisible = it.isEmpty()
                 }, {
 
                 })
