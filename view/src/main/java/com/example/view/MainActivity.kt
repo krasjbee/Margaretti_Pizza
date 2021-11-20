@@ -1,4 +1,4 @@
-package com.example.margarettipizza
+package com.example.view
 
 import android.os.Bundle
 import by.kirich1409.viewbindingdelegate.viewBinding

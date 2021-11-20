@@ -1,6 +1,6 @@
 package com.example.margarettipizza.di
 
-import com.example.margarettipizza.MainActivity
+import com.example.view.MainActivity
 import com.example.view.cart.CartFragment
 import com.example.view.details.DetailsDialog
 import com.example.view.menu.MenuFragment
