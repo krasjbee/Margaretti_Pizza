@@ -52,15 +52,18 @@
         <SearchView
             android:id="@+id/sv_pizza_filter"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="42dp"
 
             android:layout_gravity="end"
             android:iconifiedByDefault="true"
             android:imeOptions="actionSearch"
             android:layoutDirection="ltr"
             android:maxWidth="600dp"
+
             android:searchIcon="@drawable/ic_looking_glass"
-            app:searchHintIcon="@null" />
+            android:closeIcon="@drawable/ic_looking_glass_background"
+            android:queryHint="Write something"
+            android:searchHintIcon="@color/transparent" />
     </Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView

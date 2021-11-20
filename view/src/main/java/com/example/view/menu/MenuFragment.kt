@@ -133,7 +133,7 @@ class MenuFragment : DaggerFragment(R.layout.fragment_home) {
 //                Setting up searchview background if it's closed
             setOnCloseListener {
                 background = ResourcesCompat.getDrawable(resources, R.color.white, null)
-                viewModel.getPizzaList()
+//                viewModel.getPizzaList()
                 false
             }
         }
