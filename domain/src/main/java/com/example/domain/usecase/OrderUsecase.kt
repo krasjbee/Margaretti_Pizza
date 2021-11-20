@@ -15,12 +15,6 @@ class OrderUsecase(
 ) {
     private val disposable = CompositeDisposable()
 
-//    fun increment2(id: Int) : Completable {
-//        return orderRepository.getOrderEntityById(id).toMaybe().flatMapCompletable {
-//
-//        }
-//    }
-
     fun incrementQuantity(id: Int): Completable {
         //little workaround
         return orderRepository.getOrderEntityById(id).flatMapCompletable { orderEntityList ->
@@ -34,7 +28,7 @@ class OrderUsecase(
 
     fun decrementQuantity(id: Int): Completable {
         return orderRepository.getOrderEntityById(id).flatMapCompletable { orderEntityList ->
-            if (!orderEntityList.isEmpty()) {
+            if (orderEntityList.isNotEmpty()) {
                 val oldOrderEntity = orderEntityList.first()
                 if (oldOrderEntity.quantity == 1) {
                     orderRepository.deleteEntity(id)

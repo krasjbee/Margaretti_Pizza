@@ -7,13 +7,13 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject
 
 class DetailsViewModel @Inject constructor(
-    private val usecase: PizzaUsecase,
+    private val pizzaUsecase: PizzaUsecase,
     private val orderUsecase: OrderUsecase
 ) : ViewModel() {
 
     private val disposable = CompositeDisposable()
 
-    fun getPizzaById(id: Int) = usecase.getPizzaById(id)
+    fun getPizzaById(id: Int) = pizzaUsecase.getPizzaById(id)
 
     fun addToCart(id: Int) {
         disposable.add(orderUsecase.incrementQuantity(id).subscribe())

@@ -21,7 +21,6 @@ class EndFragment : Fragment(R.layout.fragment_end) {
                     .replace(R.id.main_container, MenuFragment())
                     .commit()
                 //clear backstack to prevent some weird flow and not get back after order is finished
-                //fixme
                 parentFragmentManager.clearAllBackStack()
             }
         }

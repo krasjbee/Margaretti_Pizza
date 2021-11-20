@@ -8,8 +8,6 @@ interface PizzaLocalRepository {
 
     fun addToDatabase(pizzaList: List<PizzaEntity>): Completable
 
-    fun removePizza(pizza: PizzaEntity): Completable
-
     fun getAllPizza(): Single<List<PizzaEntity>>
 
     fun getPizzaById(id: Int): Single<PizzaEntity>

@@ -7,7 +7,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject
 
 class PreviewViewModel @Inject constructor(
-    private val usecase: PizzaUsecase,
+    private val usecasePizza: PizzaUsecase,
     private val orderUsecase: OrderUsecase
 ) : ViewModel() {
 
@@ -17,7 +17,7 @@ class PreviewViewModel @Inject constructor(
         disposable.add(orderUsecase.incrementQuantity(id).subscribe())
     }
 
-    fun getPizzaById(id: Int) = usecase.getPizzaById(id)
+    fun getPizzaById(id: Int) = usecasePizza.getPizzaById(id)
 
     override fun onCleared() {
         disposable.clear()

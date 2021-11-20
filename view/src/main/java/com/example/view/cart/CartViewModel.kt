@@ -1,6 +1,5 @@
 package com.example.view.cart
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.domain.entities.OrderAndPizzaEntity
 import com.example.domain.usecase.OrderUsecase
@@ -34,9 +33,8 @@ class CartViewModel @Inject constructor(private val orderUsecase: OrderUsecase) 
     }
 
     fun postOrder() {
-        disposable.add(orderUsecase.postOrder()
-            .subscribe({ Log.d("qwe", "postOrder: succcccccc ") },
-                { Log.d("qwe", "postOrder:${it.stackTraceToString()} ") })
+        disposable.add(
+            orderUsecase.postOrder().subscribe()
         )
     }
 

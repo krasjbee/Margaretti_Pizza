@@ -1,6 +1,9 @@
 package com.example.data.local.pizzaDatabase
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.example.data.remote.dto.PizzaDto
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
@@ -13,15 +16,6 @@ interface PizzaDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(list: List<PizzaDto>): Completable
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(pizzaDto: PizzaDto): Completable
-
-    @Delete
-    fun delete(pizza: PizzaDto): Completable
-
-    @Update
-    fun updatePizza(pizza: PizzaDto): Completable
 
     @Query("SELECT * FROM pizza_table WHERE name LIKE :query")
     fun getByNameMatch(query: String): Single<List<PizzaDto>>

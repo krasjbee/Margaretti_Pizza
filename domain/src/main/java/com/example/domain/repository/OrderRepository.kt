@@ -19,10 +19,8 @@ interface OrderRepository {
 
     fun getOrderEntityById(id: Int): Single<List<OrderEntity>>
 
-    fun updateEntity(orderDto: OrderEntity): Completable
+    fun updateEntity(orderEntity: OrderEntity): Completable
 
-    fun deleteEntity(orderDto: OrderEntity): Completable
-
-    fun addEntity(orderDto: OrderEntity): Completable
+    fun addEntity(orderEntity: OrderEntity): Completable
 
 }

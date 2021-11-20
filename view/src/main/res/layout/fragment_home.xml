@@ -47,7 +47,6 @@
         android:title="@string/title_text_home"
         android:titleMargin="0dp"
         android:titleTextAppearance="@style/PizzaText.Toolbar.Menu">
-        <!-- fixme icon-->
 
         <SearchView
             android:id="@+id/sv_pizza_filter"

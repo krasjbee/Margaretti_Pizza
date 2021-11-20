@@ -9,7 +9,6 @@ interface PizzaRemoteRepository {
 
     fun getAll(): Single<List<PizzaEntity>>
 
-
     fun getPizzaById(id: Int): Single<PizzaEntity>
 
     fun postOrder(order: List<OrderEntity>): Completable

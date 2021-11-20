@@ -11,14 +11,14 @@ import javax.inject.Inject
 
 
 class MenuViewModel @Inject constructor(
-    private val usecase: PizzaUsecase,
+    private val pizzaUsecase: PizzaUsecase,
     private val orderUsecase: OrderUsecase
 ) : ViewModel() {
     private val disposable = CompositeDisposable()
     val pizzaList: ReplaySubject<List<PizzaEntity>> = ReplaySubject.create()
 
     fun getPizzaList() {
-        usecase.getAllPizza().subscribe({
+        pizzaUsecase.getAllPizza().subscribe({
             pizzaList.onNext(it)
         }, {
             pizzaList.onError(it)
@@ -26,7 +26,7 @@ class MenuViewModel @Inject constructor(
     }
 
     fun getFilteredList(query: String) {
-        usecase.getPizzaByName(query).subscribe({
+        pizzaUsecase.getPizzaByName(query).subscribe({
             pizzaList.onNext(it)
         }, {
             pizzaList.onError(it)
@@ -40,7 +40,7 @@ class MenuViewModel @Inject constructor(
 
     override fun onCleared() {
         disposable.clear()
-        usecase.dispose()
+        pizzaUsecase.dispose()
         super.onCleared()
     }
 }
