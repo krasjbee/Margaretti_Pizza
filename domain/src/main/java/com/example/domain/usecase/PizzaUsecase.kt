@@ -8,7 +8,7 @@ import io.reactivex.rxjava3.core.SingleSource
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 
 
-class PizzaUsecase constructor(
+class PizzaUsecase(
     private val remoteRemoteRepository: PizzaRemoteRepository,
     private val localRepository: PizzaLocalRepository
 ) {

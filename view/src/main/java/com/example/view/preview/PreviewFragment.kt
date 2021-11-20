@@ -16,9 +16,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject
 
-
-//fixme set backarrow click
-class PreviewFragment() : DaggerFragment(R.layout.fragment_preview) {
+class PreviewFragment : DaggerFragment(R.layout.fragment_preview) {
 
     private val binding by viewBinding(FragmentPreviewBinding::bind)
 

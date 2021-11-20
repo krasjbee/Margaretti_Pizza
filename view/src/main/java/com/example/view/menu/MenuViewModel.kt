@@ -9,7 +9,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.subjects.ReplaySubject
 import javax.inject.Inject
 
-//fixme cleanup
+
 class MenuViewModel @Inject constructor(
     private val usecase: PizzaUsecase,
     private val orderUsecase: OrderUsecase

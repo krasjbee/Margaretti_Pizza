@@ -2,7 +2,6 @@ package com.example.data.local.orderDatabase
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.data.remote.dto.OrderRemoteDto
 import com.example.domain.entities.OrderEntity
 import kotlinx.serialization.Serializable
 
@@ -22,6 +21,3 @@ fun OrderEntity.convertToOrderDto(): OrderDto {
     return OrderDto(this.pizzaId, this.quantity)
 }
 
-fun OrderDto.convertToOrderRemoteDto(): OrderRemoteDto {
-    return OrderRemoteDto(this.id, this.quantity)
-}

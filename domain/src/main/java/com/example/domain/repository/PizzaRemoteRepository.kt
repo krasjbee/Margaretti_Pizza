@@ -6,10 +6,7 @@ import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
 interface PizzaRemoteRepository {
-    // TODO: 19.10.2021 add documentation
-    /**
-     *
-     */
+
     fun getAll(): Single<List<PizzaEntity>>
 
 

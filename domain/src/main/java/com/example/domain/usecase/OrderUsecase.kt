@@ -9,7 +9,7 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 
 
-class OrderUsecase constructor(
+class OrderUsecase(
     private val orderRepository: OrderRepository,
     private val pizzaRemoteRepository: PizzaRemoteRepository
 ) {

@@ -15,7 +15,6 @@ class CartViewHolder(private val binding: PizzaCartCardBinding) :
         val orderEntity = orderWithPizza.orderEntity
         with(binding) {
             tvPizzaName.text = pizzaDto.name
-            //fixme move to usecase
             tvPizzaPrice.text = pizzaDto.price
             tvQuantity.text = orderEntity.quantity.toString()
             Glide.with(this.root).load(pizzaDto.imageUrls.first()).into(sivPizzaCartPic)

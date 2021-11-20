@@ -26,12 +26,11 @@ class DetailsDialog : BottomSheetDialogFragment() {
 
     private val disposable = CompositeDisposable()
 
-    //fixme inflater and binding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.dialog_details, container, false)
+    ): View = DialogDetailsBinding.inflate(inflater, container, false).root
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +43,7 @@ class DetailsDialog : BottomSheetDialogFragment() {
 
 
         val pizzaStream = viewModel.getPizzaById(id)
-        //fixme move to separate methods
+
         pizzaStream.observeOn(AndroidSchedulers.mainThread()).subscribe({ pizza ->
 
             setupViews(pizza)

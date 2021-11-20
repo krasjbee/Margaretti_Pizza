@@ -89,32 +89,22 @@
         android:id="@+id/bottm_bar"
         android:layout_width="match_parent"
         android:layout_height="95dp"
+        android:elevation="20dp"
         android:background="@drawable/bottom_bar_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!--    <com.google.android.material.card.MaterialCardView-->
-    <!--        android:id="@+id/bottm_bar"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="95dp"-->
-    <!--        android:elevation="20dp"-->
-    <!--        app:shapeAppearanceOverlay="@style/BottomBarShape"-->
-    <!--        android:visibility="gone"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"/>-->
-
     <LinearLayout
         android:id="@+id/ll_clickable"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="19dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/bottom_button_shape"
-        android:elevation="1dp"
+        android:elevation="20dp"
 
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@id/bottm_bar"

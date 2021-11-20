@@ -15,7 +15,6 @@ class PizzaViewHolder(private val binding: PizzaListCardBinding) :
             tvPizzaName.text = pizza.name
             tvPizzaDescription.text = pizza.description
             tvPizzaCardPrice.text = pizza.price
-            //TODO move picture download to viewmodel
             Glide.with(this.root)
                 .load(pizza.imageUrls[0]).into(sivPizzaPic)
             sivPizzaPic.setOnClickListener {
