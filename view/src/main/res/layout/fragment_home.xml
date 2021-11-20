@@ -29,7 +29,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.Toolbar
+    <Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
@@ -43,9 +43,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/title_text_home"
-        app:titleMargin="0dp"
-        app:titleTextAppearance="@style/PizzaText.Name">
+
+        android:title="@string/title_text_home"
+        android:titleMargin="0dp"
+        android:titleTextAppearance="@style/PizzaText.Toolbar.Menu">
         <!-- fixme icon-->
 
         <SearchView
@@ -60,7 +61,7 @@
             android:maxWidth="600dp"
             android:searchIcon="@drawable/ic_looking_glass"
             app:searchHintIcon="@null" />
-    </androidx.appcompat.widget.Toolbar>
+    </Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_pizza_list"
