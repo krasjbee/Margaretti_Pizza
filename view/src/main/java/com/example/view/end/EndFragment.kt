@@ -18,9 +18,10 @@ class EndFragment : Fragment(R.layout.fragment_end) {
         with(binding) {
             llClickable.setOnClickListener {
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.main_container, MenuFragment::class.java, null, null)
+                    .replace(R.id.main_container, MenuFragment())
                     .commit()
                 //clear backstack to prevent some weird flow and not get back after order is finished
+                //fixme
                 parentFragmentManager.clearAllBackStack()
             }
         }

@@ -11,7 +11,7 @@ import io.reactivex.rxjava3.core.Single
 interface OrderDao {
 
     @Query("SELECT * FROM order_table")
-    fun getOrder(): Observable<List<OrderDto>>
+    fun getOrder(): Single<List<OrderDto>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertOrder(list: List<OrderDto>): Completable

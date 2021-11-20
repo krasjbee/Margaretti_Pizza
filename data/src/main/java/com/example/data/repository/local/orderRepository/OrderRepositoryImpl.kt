@@ -16,12 +16,12 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 class OrderRepositoryImpl constructor(private val orderDatabase: OrderDao) :
     OrderRepository {
 
-    override fun getOrder(): Observable<List<OrderEntity>> {
-        return orderDatabase.getOrder().subscribeOn(Schedulers.io()).map {
+    override fun getOrder(): Single<List<OrderEntity>> {
+        return orderDatabase.getOrder().map {
             it.map {
                 it.convertToOrderEntity()
             }
-        }
+        }.subscribeOn(Schedulers.io())
     }
 
     override fun deleteEntity(id: Int): Completable {
@@ -59,11 +59,4 @@ class OrderRepositoryImpl constructor(private val orderDatabase: OrderDao) :
         return orderDatabase.insertEntity(orderDto.convertToOrderDto()).subscribeOn(Schedulers.io())
     }
 
-    override fun getSingleOrder(): Single<List<OrderAndPizzaEntity>> {
-        return orderDatabase.getSingleOrderWithPizza().subscribeOn(Schedulers.io()).map {
-            it.map {
-                it.convertToOrderAndPizzaEntity()
-            }
-        }
-    }
 }

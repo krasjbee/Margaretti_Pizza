@@ -9,7 +9,7 @@ import io.reactivex.rxjava3.core.Single
 
 interface OrderRepository {
 
-    fun getOrder(): Observable<List<OrderEntity>>
+    fun getOrder(): Single<List<OrderEntity>>
 
     fun deleteEntity(id: Int): Completable
 
@@ -25,5 +25,4 @@ interface OrderRepository {
 
     fun addEntity(orderDto: OrderEntity): Completable
 
-    fun getSingleOrder(): Single<List<OrderAndPizzaEntity>>
 }

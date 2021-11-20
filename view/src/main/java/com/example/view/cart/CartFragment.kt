@@ -106,6 +106,7 @@ class CartFragment : DaggerFragment(R.layout.fragment_cart) {
             }
         }
         binding.llClickable.setOnClickListener {
+            viewModel.postOrder()
             parentFragmentManager.commit {
                 replace(
                     R.id.main_container,

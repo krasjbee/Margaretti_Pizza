@@ -22,6 +22,7 @@ class UsecaseModule {
     @Singleton
     @Provides
     fun provideOrderUsecase(
-        orderRepositoryImpl: OrderRepository
-    ): OrderUsecase = OrderUsecase(orderRepositoryImpl)
+        orderRepositoryImpl: OrderRepository,
+        pizzaRemoteRepo: PizzaRemoteRepository
+    ): OrderUsecase = OrderUsecase(orderRepositoryImpl, pizzaRemoteRepo)
 }

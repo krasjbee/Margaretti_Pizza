@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 
 fun FragmentManager.clearAllBackStack() =
-    popBackStack(getBackStackEntryAt(0).id, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+    popBackStackImmediate(getBackStackEntryAt(0).id, FragmentManager.POP_BACK_STACK_INCLUSIVE)
 
 fun Fragment.hideKeyboard() {
     val inputMethodManager =
