@@ -41,6 +41,7 @@ class CartViewModel @Inject constructor(private val orderUsecase: OrderUsecase) 
     }
 
     override fun onCleared() {
+        orderUsecase.dispose()
         disposable.clear()
         super.onCleared()
     }

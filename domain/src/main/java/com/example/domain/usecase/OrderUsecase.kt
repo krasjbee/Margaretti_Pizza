@@ -6,14 +6,14 @@ import com.example.domain.repository.OrderRepository
 import com.example.domain.repository.PizzaRemoteRepository
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 
 
 class OrderUsecase constructor(
     private val orderRepository: OrderRepository,
     private val pizzaRemoteRepository: PizzaRemoteRepository
 ) {
-
-
+    private val disposable = CompositeDisposable()
     fun incrementQuantity(id: Int): Completable {
         return orderRepository.getOrderEntityById(id).flatMapCompletable { oldEntity ->
             orderRepository.updateEntity(OrderEntity(oldEntity.pizzaId, oldEntity.quantity + 1))
@@ -53,8 +53,11 @@ class OrderUsecase constructor(
     fun postOrder(): Completable {
         return orderRepository.getOrder().flatMapCompletable {
             pizzaRemoteRepository.postOrder(it)
-            orderRepository.deleteOrder()
-        }
+        }.andThen { disposable.add(orderRepository.deleteOrder().subscribe()) }
+    }
+
+    fun dispose() {
+        disposable.dispose()
     }
 
 }
