@@ -14,18 +14,35 @@ class OrderUsecase(
     private val pizzaRemoteRepository: PizzaRemoteRepository
 ) {
     private val disposable = CompositeDisposable()
+
+//    fun increment2(id: Int) : Completable {
+//        return orderRepository.getOrderEntityById(id).toMaybe().flatMapCompletable {
+//
+//        }
+//    }
+
     fun incrementQuantity(id: Int): Completable {
-        return orderRepository.getOrderEntityById(id).flatMapCompletable { oldEntity ->
-            orderRepository.updateEntity(OrderEntity(oldEntity.pizzaId, oldEntity.quantity + 1))
+        //little workaround
+        return orderRepository.getOrderEntityById(id).flatMapCompletable { orderEntityList ->
+            if (orderEntityList.isEmpty()) {
+                orderRepository.addEntity(OrderEntity(id, 1))
+            } else {
+                orderRepository.updateEntity(OrderEntity(id, orderEntityList.first().quantity + 1))
+            }
         }
     }
 
     fun decrementQuantity(id: Int): Completable {
-        return orderRepository.getOrderEntityById(id).flatMapCompletable { oldEntity ->
-            if (oldEntity.quantity == 1) {
-                orderRepository.deleteEntity(oldEntity)
+        return orderRepository.getOrderEntityById(id).flatMapCompletable { orderEntityList ->
+            if (!orderEntityList.isEmpty()) {
+                val oldOrderEntity = orderEntityList.first()
+                if (oldOrderEntity.quantity == 1) {
+                    orderRepository.deleteEntity(id)
+                } else {
+                    orderRepository.updateEntity(OrderEntity(id, oldOrderEntity.quantity - 1))
+                }
             } else {
-                orderRepository.updateEntity(OrderEntity(oldEntity.pizzaId, oldEntity.quantity - 1))
+                Completable.error(Throwable("Element does not exist"))
             }
         }
     }

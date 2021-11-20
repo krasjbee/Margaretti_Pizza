@@ -17,7 +17,7 @@ interface OrderRepository {
 
     fun getOrderWithPizza(): Observable<List<OrderAndPizzaEntity>>
 
-    fun getOrderEntityById(id: Int): Single<OrderEntity>
+    fun getOrderEntityById(id: Int): Single<List<OrderEntity>>
 
     fun updateEntity(orderDto: OrderEntity): Completable
 

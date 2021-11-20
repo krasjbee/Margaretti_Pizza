@@ -35,7 +35,7 @@ interface OrderDao {
     fun insertEntity(dto: OrderDto): Completable
 
     @Query("SELECT * FROM order_table WHERE id LIKE :id ")
-    fun getEntityById(id: Int): Single<OrderDto>
+    fun getEntityById(id: Int): Single<List<OrderDto>>
 
     @Transaction
     @Query("SELECT * FROM 'order_table' as orderTable INNER JOIN 'pizza_table' as pizzaTable where orderTable.id == pizzaTable.id")

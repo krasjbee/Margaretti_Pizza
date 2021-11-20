@@ -40,9 +40,11 @@ class OrderRepositoryImpl constructor(private val orderDatabase: OrderDao) :
         }
     }
 
-    override fun getOrderEntityById(id: Int): Single<OrderEntity> {
+    override fun getOrderEntityById(id: Int): Single<List<OrderEntity>> {
         return orderDatabase.getEntityById(id).subscribeOn(Schedulers.io()).map {
-            it.convertToOrderEntity()
+            it.map {
+                it.convertToOrderEntity()
+            }
         }
     }
 

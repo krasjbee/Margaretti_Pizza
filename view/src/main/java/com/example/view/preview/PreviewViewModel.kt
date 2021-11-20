@@ -1,7 +1,6 @@
 package com.example.view.preview
 
 import androidx.lifecycle.ViewModel
-import com.example.domain.entities.OrderEntity
 import com.example.domain.usecase.OrderUsecase
 import com.example.domain.usecase.PizzaUsecase
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -15,7 +14,7 @@ class PreviewViewModel @Inject constructor(
     private val disposable = CompositeDisposable()
 
     fun addToCart(id: Int) {
-        disposable.add(orderUsecase.insert(OrderEntity(id, 1)).subscribe())
+        disposable.add(orderUsecase.incrementQuantity(id).subscribe())
     }
 
     fun getPizzaById(id: Int) = usecase.getPizzaById(id)
